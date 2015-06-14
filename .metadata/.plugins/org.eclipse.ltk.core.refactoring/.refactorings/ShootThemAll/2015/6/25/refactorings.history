@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;controller.UpdateProfile&apos; to &apos;UpdateUserInfo&apos;&#x0A;- Original project: &apos;ShootThemAll&apos;&#x0A;- Original element: &apos;controller.UpdateProfile&apos;&#x0A;- Renamed element: &apos;controller.UpdateUserInfo&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;UpdateProfile&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;controller{UpdateProfile.java[UpdateProfile" matchStrategy="1" name="UpdateUserInfo" qualified="false" references="true" similarDeclarations="false" stamp="1434293585315" textual="false" version="1.0"/>
+</session>
