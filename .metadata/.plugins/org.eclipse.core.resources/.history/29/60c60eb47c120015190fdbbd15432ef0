@@ -67,7 +67,6 @@ public class Enemy {
 		}
 	}
 	
-	//create JSONObject
 	public JSONObject toJSONObject(){
 		JSONObject objEnemy = new JSONObject();
 		objEnemy.put("type", this.type);
