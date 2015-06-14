@@ -6,15 +6,6 @@ public class Weapon {
 	private int price;
 	private boolean isActive;
 	
-	
-	
-	public Weapon(int type, int damage, int price, boolean isActive) {
-		setType(type);
-		setDamage(damage);
-		setPrice(price);
-		setActive(isActive);
-	}
-
 	//get
 	public int getType() {
 		return type;
@@ -61,6 +52,8 @@ public class Weapon {
 		}
 	}
 	
-
+	
+	
+	
 
 }

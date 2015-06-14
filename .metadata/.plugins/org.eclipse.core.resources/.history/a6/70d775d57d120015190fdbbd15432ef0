@@ -67,6 +67,15 @@ public class Enemy {
 		}
 	}
 	
+	//create JSONObject
+	public JSONObject toJSONObject(){
+		JSONObject objEnemy = new JSONObject();
+		objEnemy.put("type", this.type);
+		objEnemy.put("health", this.health);
+		objEnemy.put("duration", this.duration);
+		objEnemy.put("damage", this.damage);
+		return objEnemy;
+	}
 
 	
 
