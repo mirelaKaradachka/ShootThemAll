@@ -66,7 +66,7 @@ public class LevelFactory {
 			
 		}
 		
-		int randomBullets = rand.nextInt((maxLevel - level) * 3 + 1) + (maxLevel - level) ; 
+		int randomBullets = rand.nextInt((maxLevel - level) * maxLevel + 1) + (maxLevel - level) ; 
 		System.out.println("RB = " + randomBullets);
 		bullets += randomBullets;
 		

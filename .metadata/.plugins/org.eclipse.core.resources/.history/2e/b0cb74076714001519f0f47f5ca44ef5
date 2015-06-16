@@ -9,7 +9,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class LevelFactory {
-	final int maxLevel = 3;
 	
 	public JSONObject buildLevel(int userID, int level){
 		Random rand = new Random();
@@ -17,15 +16,15 @@ public class LevelFactory {
 		objLevel.put("userHealth", 3);
 		
 		String message = "";
-		
+		int userLevel = 3 + 1;
 
 		/*
 		 * проверка за валидно ниво от базата данни : userLevel = нивото до което е стигнал потребителя, но не е минал
 		 */
 		
-		if(level > maxLevel + 1){
+		if(level > userLevel){
 			message = "Invalid level";
-			level = maxLevel;
+			level = 1;
 		}else{
 
 			message = "Success";	
@@ -57,7 +56,7 @@ public class LevelFactory {
 		weaponObj.put("damage", weapon.getDamage());
 		
 		for(int i = 0 ; i < enemies.length; i++){
-			enemies[i] = new Enemy(i+1, i+1, (maxLevel * 200) + 100 - (i+1) * 200, i+1);
+			enemies[i] = new Enemy(i+1, i+1, 700 - (i+1) * 200, i+1);
 		}
 		
 		int bullets = 0;
@@ -66,7 +65,7 @@ public class LevelFactory {
 			
 		}
 		
-		int randomBullets = rand.nextInt((maxLevel - level) * 3 + 1) + (maxLevel - level) ; 
+		int randomBullets = rand.nextInt((3 - level) * 3 + 1) + (3 - level) ; 
 		System.out.println("RB = " + randomBullets);
 		bullets += randomBullets;
 		
