@@ -1,11 +1,16 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * Servlet implementation class GenerateLevel
@@ -14,26 +19,41 @@ import javax.servlet.http.HttpServletResponse;
 public class GenerateLevel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+  
     public GenerateLevel() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+    }
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String line = request.getReader().readLine();
+		
+		//test
+		JSONObject test = new JSONObject();
+		test.put("userId", 1);
+		test.put("level", 3);
+		line = test.toJSONString();
+		
+		JSONParser parser = new JSONParser();
+		try {
+			JSONObject levelObj = (JSONObject) parser.parse(line);
+			int userId = Integer.parseInt(levelObj.get("userId").toString());		
+			int level = Integer.parseInt(levelObj.get("level").toString());
+			
+			LevelFactory levelFactory = new LevelFactory();
+			JSONObject result = levelFactory.buildLevel(userId, level);
+			
+			System.out.println(result.toJSONString());
+			response.getWriter().write(result.toJSONString());
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
