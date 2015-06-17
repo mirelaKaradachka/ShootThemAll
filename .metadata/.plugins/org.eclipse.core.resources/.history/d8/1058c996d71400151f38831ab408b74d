@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,17 +58,13 @@ public class WeaponsStore extends HttpServlet {
 			weapons[1] = new Weapon(2, 2, 200);
 			weapons[2] = new Weapon(2, 2, 500);
 			
-			// тест -> това идва от базата данни
-			ArrayList<Integer> unlockedWeapons = new ArrayList<Integer>();
-			unlockedWeapons.add(new Weapon(1, 1, 0).getType());
-			
 			JSONObject result = new JSONObject();
 			result.put("score", score);
 			
 			JSONObject weaponsObj[] = new JSONObject[weapons.length];
 			JSONArray weaponsArr = new JSONArray();
 			
-			for(int i = 0 ; i < weapons.length; i++){
+			for(int i = 0 ; i <weapons.length; i++){
 				weaponsObj[i] = new JSONObject();
 				weaponsObj[i].put("type", weapons[i].getType());
 				weaponsObj[i].put("damage", weapons[i].getDamage());
@@ -79,17 +74,6 @@ public class WeaponsStore extends HttpServlet {
 			}
 			
 			result.put("weapons", weaponsArr);
-			
-			ArrayList<JSONObject> unlockedWeaponsObj = new ArrayList<JSONObject>() ;		
-			JSONArray unlochedWeaponsArr = new JSONArray();
-			
-			for(int i = 0 ; i < unlockedWeapons.size(); i++){
-				unlockedWeaponsObj.add(i, new JSONObject());
-				unlockedWeaponsObj.get(i).put("type", unlockedWeapons.get(i));			
-				unlochedWeaponsArr.add(weaponsObj[i]);
-			}
-			
-			result.put("unlockedWeapons", unlochedWeaponsArr);
 			
 			System.out.println(result.toJSONString());
 			response.getWriter().write(result.toJSONString());

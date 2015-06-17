@@ -80,16 +80,16 @@ public class WeaponsStore extends HttpServlet {
 			
 			result.put("weapons", weaponsArr);
 			
-			ArrayList<JSONObject> unlockedWeaponsObj = new ArrayList<JSONObject>() ;		
+			JSONObject unlockedWeaponsObj[] = new JSONObject[unlockedWeapons.size()];
 			JSONArray unlochedWeaponsArr = new JSONArray();
 			
-			for(int i = 0 ; i < unlockedWeapons.size(); i++){
-				unlockedWeaponsObj.add(i, new JSONObject());
-				unlockedWeaponsObj.get(i).put("type", unlockedWeapons.get(i));			
-				unlochedWeaponsArr.add(weaponsObj[i]);
+			for(int i = 0 ; i < unlockedWeaponsObj.length; i++){
+				unlockedWeaponsObj[i] = new JSONObject();
+				unlockedWeaponsObj[i].put("type", unlockedWeapons.get(i));
+				
+				
+				weaponsArr.add(weaponsObj[i]);
 			}
-			
-			result.put("unlockedWeapons", unlochedWeaponsArr);
 			
 			System.out.println(result.toJSONString());
 			response.getWriter().write(result.toJSONString());

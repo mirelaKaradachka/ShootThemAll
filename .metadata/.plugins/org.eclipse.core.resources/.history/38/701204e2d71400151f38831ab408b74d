@@ -84,7 +84,6 @@ public class LevelBuilder {
 		objLevel.put("enemies", enemiesArr);
 	
 		
-		
 		return objLevel;
 	}
 
