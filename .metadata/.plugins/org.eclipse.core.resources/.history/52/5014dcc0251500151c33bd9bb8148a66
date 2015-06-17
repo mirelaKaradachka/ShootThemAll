@@ -92,7 +92,8 @@ public class WeaponsStore extends HttpServlet {
 		response.getWriter().write(result.toJSONString());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		String line = request.getReader().readLine();
 
 		// test
@@ -100,40 +101,36 @@ public class WeaponsStore extends HttpServlet {
 		test.put("userId", 1);
 		test.put("weaponType", 2);
 		line = test.toJSONString();
-		
+
 		JSONObject result = new JSONObject();
 		String message = null;
-		
+
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject userObj = (JSONObject) parser.parse(line);
 			int userId = Integer.parseInt(userObj.get("userId").toString());
-			int weponType = Integer.parseInt(userObj.get("weaponType").toString());
-			
+			int weponType = Integer.parseInt(userObj.get("weaponType")
+					.toString());
+
 			/*
-			 *  ОТКЛЮЧВАМЕ ОРЪЖИЕ
-			 * 
-			 *  Проверка в базата данни дали оръжието от този тип е заключено за потребителя с това userId
-			 *  и дали потребителя разполага с достатачно точки, за да го отключи
-			 *  Ако е заключено и потребителя има достатачно точки
-			 *  го записваме за потребителя като отключено оръжие
-			 * 
+			 * проверка в базата данни дали оръжието от този тип е отключено за
+			 * потребителя с това userId ако е отключено го записваме за
+			 * потребителя като избрано оръжие
 			 */
-			
+
 			message = "success";
+			response.setStatus(200);
 			result.put("message", message);
-			response.setStatus(200);			
-			
+
 		} catch (ParseException e) {
 
 			result.put("error", "Invalid JSON");
 			response.setStatus(400);
-			
+
 		}
+
 		System.out.println(result.toJSONString());
 		response.getWriter().write(result.toJSONString());
-		
-		
 	}
 
 }

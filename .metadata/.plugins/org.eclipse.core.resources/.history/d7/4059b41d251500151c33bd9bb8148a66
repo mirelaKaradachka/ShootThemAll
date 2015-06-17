@@ -48,7 +48,7 @@ public class LevelManager extends HttpServlet {
 		} else {
 
 			response.setStatus(400);
-			result.put("error", "Invalid parameter");
+			result.put("error", "Invalid JSON");
 		}
 
 		System.out.println(result.toJSONString());

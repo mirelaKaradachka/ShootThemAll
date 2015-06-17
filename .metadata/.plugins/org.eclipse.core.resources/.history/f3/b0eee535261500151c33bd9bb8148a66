@@ -111,14 +111,12 @@ public class WeaponsStore extends HttpServlet {
 			int weponType = Integer.parseInt(userObj.get("weaponType").toString());
 			
 			/*
-			 *  ОТКЛЮЧВАМЕ ОРЪЖИЕ
-			 * 
 			 *  Проверка в базата данни дали оръжието от този тип е заключено за потребителя с това userId
 			 *  и дали потребителя разполага с достатачно точки, за да го отключи
 			 *  Ако е заключено и потребителя има достатачно точки
 			 *  го записваме за потребителя като отключено оръжие
 			 * 
-			 */
+			 * */
 			
 			message = "success";
 			result.put("message", message);

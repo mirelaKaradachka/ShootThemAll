@@ -9,3 +9,5 @@
 1434567499252	Rename type 'WeaponManager'
 1434567593056	Rename type 'UnlockWeapon'
 1434567941157	Rename type 'UpdateUserInfo'
+1434568647445	Delete element
+1434568846375	Rename type 'ActiveWeaponsManager'

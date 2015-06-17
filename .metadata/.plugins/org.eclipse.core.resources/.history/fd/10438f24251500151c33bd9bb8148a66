@@ -56,7 +56,7 @@ public class LevelsMap extends HttpServlet {
 
 		} else {
 
-			result.put("error", "Invalid parameter");
+			result.put("error", "Invalid JSON");
 			response.setStatus(400);
 
 		}
