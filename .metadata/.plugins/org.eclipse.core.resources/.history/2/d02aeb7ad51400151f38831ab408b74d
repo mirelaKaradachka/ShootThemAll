@@ -43,8 +43,8 @@ public class GenerateLevel extends HttpServlet {
 			int userId = Integer.parseInt(levelObj.get("userId").toString());		
 			int level = Integer.parseInt(levelObj.get("level").toString());
 			
-			LevelBuilder levelBuilder = new LevelBuilder();
-			JSONObject result = levelBuilder.buildLevel(userId, level);
+			LevelBuilder levelFactory = new LevelBuilder();
+			JSONObject result = LevelBuilder.buildLevel(userId, level);
 			
 			System.out.println(result.toJSONString());
 			response.getWriter().write(result.toJSONString());

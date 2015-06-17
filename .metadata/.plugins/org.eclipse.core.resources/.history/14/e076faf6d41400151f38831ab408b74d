@@ -4,13 +4,14 @@ public class Weapon {
 	private int type;
 	private int damage;
 	private int price;
+	private boolean isActive;
 	
 	//constructor
-	public Weapon(int type, int damage, int price) {
+	public Weapon(int type, int damage, int price, boolean isActive) {
 		setType(type);
 		setDamage(damage);
 		setPrice(price);
-
+		setActive(isActive);
 	}
 
 	//get
@@ -26,8 +27,15 @@ public class Weapon {
 		return price;
 	}
 	
+	public boolean isActive() {
+		return isActive;
+	}
 	
 	//set
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 	private void setType(int type) {
 		if(type > 0){
 			this.type = type;

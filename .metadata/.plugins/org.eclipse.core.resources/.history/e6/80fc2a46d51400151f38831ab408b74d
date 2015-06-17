@@ -46,17 +46,15 @@ public class WeaponsStore extends HttpServlet {
 			int userId = Integer.parseInt(userObj.get("userId").toString());
 			
 			/*
-			 *  select в базата данни по userId за точките които потребителя има,
-			 *  за всичките оръжия 
-			 *  и за активните за него оръжия
+			 *  select в базата данни по userId за точките които потребителя има и за активните за него оръжия
 			 * 
 			 */
 			
 			int score = 400;
 			Weapon weapons[] = new Weapon[3];
-			weapons[0] = new Weapon(1, 1, 0);
-			weapons[1] = new Weapon(2, 2, 200);
-			weapons[2] = new Weapon(2, 2, 500);
+			weapons[0] = new Weapon(1, 1, 0, true);
+			weapons[1] = new Weapon(2, 2, 200, false);
+			weapons[2] = new Weapon(2, 2, 500, false);
 			
 			JSONObject result = new JSONObject();
 			result.put("score", score);
@@ -69,7 +67,7 @@ public class WeaponsStore extends HttpServlet {
 				weaponsObj[i].put("type", weapons[i].getType());
 				weaponsObj[i].put("damage", weapons[i].getDamage());
 				weaponsObj[i].put("price", weapons[i].getPrice());
-				
+				weaponsObj[i].put("isActive", weapons[i].isActive());
 				weaponsArr.add(weaponsObj[i]);
 			}
 			
