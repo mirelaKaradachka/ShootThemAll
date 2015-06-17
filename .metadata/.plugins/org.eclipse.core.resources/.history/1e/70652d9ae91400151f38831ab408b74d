@@ -60,8 +60,9 @@ public class SaveLevelInfo extends HttpServlet {
 			}
 			
 			message = "success";
-			response.setStatus(200);
 			result.put("message", message);
+			System.out.println(result.toJSONString());
+			response.getWriter().write(result.toJSONString());
 			
 		} catch (ParseException e) {
 
@@ -69,8 +70,6 @@ public class SaveLevelInfo extends HttpServlet {
 			response.setStatus(400);
 			
 		}
-		System.out.println(result.toJSONString());
-		response.getWriter().write(result.toJSONString());
 		
 		
 	}

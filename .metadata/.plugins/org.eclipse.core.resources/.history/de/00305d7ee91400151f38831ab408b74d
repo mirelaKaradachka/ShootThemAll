@@ -58,9 +58,11 @@ public class LevelsMap extends HttpServlet {
 				numberOfActiveLevels = numberOfAllLevels;
 			}
 
-			response.setStatus(200);
 			result.put("numberOfAllLevels", numberOfAllLevels);
 			result.put("numberOfActiveLevels", numberOfActiveLevels);
+
+			response.setStatus(200);
+			response.getWriter().write(result.toJSONString());
 
 		} catch (ParseException e) {
 
@@ -68,7 +70,6 @@ public class LevelsMap extends HttpServlet {
 			response.setStatus(400);
 			
 		}
-		response.getWriter().write(result.toJSONString());
 	}
 
 }

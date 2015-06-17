@@ -91,17 +91,17 @@ public class WeaponsStore extends HttpServlet {
 				unlochedWeaponsArr.add(unlockedWeaponsObj);
 			}
 			
+			result.put("unlockedWeapons", unlochedWeaponsArr);
+			
+			System.out.println(result.toJSONString());
 			response.setStatus(200);
-			result.put("unlockedWeapons", unlochedWeaponsArr);			
+			response.getWriter().write(result.toJSONString());
 			
 		} catch (ParseException e) {
 
 			result.put("error", "Invalid JSON");
 			response.setStatus(400);
-			
 		}
-		System.out.println(result.toJSONString());
-		response.getWriter().write(result.toJSONString());
 	}
 
 }

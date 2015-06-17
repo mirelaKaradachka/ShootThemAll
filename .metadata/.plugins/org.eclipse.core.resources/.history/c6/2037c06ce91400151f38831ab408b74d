@@ -48,16 +48,16 @@ public class GenerateLevel extends HttpServlet {
 			LevelBuilder levelBuilder = new LevelBuilder();
 			result = levelBuilder.buildLevel(userId, level);
 			
+			System.out.println(result.toJSONString());
 			response.setStatus(200);
+			response.getWriter().write(result.toJSONString());
 			
 		} catch (ParseException e) {
 
-			response.setStatus(400);
 			result.put("error", "Invalid JSON");
+			response.setStatus(400);
+			
 		}
-		
-		System.out.println(result.toJSONString());
-		response.getWriter().write(result.toJSONString());
 
 	}
 

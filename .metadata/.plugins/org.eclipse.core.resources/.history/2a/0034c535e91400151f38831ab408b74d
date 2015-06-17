@@ -55,7 +55,6 @@ public class ChooseWeapon extends HttpServlet {
 			 * */
 			
 			message = "success";
-			response.setStatus(200);
 			result.put("message", message);
 			
 			
@@ -67,6 +66,7 @@ public class ChooseWeapon extends HttpServlet {
 		}
 		
 		System.out.println(result.toJSONString());
+		response.setStatus(200);
 		response.getWriter().write(result.toJSONString());
 	}
 

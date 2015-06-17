@@ -91,8 +91,9 @@ public class WeaponsStore extends HttpServlet {
 				unlochedWeaponsArr.add(unlockedWeaponsObj);
 			}
 			
+			result.put("unlockedWeapons", unlochedWeaponsArr);
+			
 			response.setStatus(200);
-			result.put("unlockedWeapons", unlochedWeaponsArr);			
 			
 		} catch (ParseException e) {
 

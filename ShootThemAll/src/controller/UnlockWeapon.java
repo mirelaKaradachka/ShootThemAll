@@ -57,11 +57,7 @@ public class UnlockWeapon extends HttpServlet {
 			
 			message = "success";
 			result.put("message", message);
-			
-			System.out.println(result.toJSONString());
-			response.setStatus(200);
-			response.getWriter().write(result.toJSONString());
-			
+			response.setStatus(200);			
 			
 		} catch (ParseException e) {
 
@@ -69,6 +65,8 @@ public class UnlockWeapon extends HttpServlet {
 			response.setStatus(400);
 			
 		}
+		System.out.println(result.toJSONString());
+		response.getWriter().write(result.toJSONString());
 		
 		
 	}
