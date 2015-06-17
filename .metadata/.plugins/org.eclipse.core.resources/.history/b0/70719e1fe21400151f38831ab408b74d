@@ -72,14 +72,14 @@ public class LevelBuilder {
 		
 		
 		JSONArray enemiesArr = new JSONArray();
-		for(int i = 0 ; i < enemies.length; i++){
+		for(int i = 0 ; i < level; i++){
 			JSONObject enemyObj = new JSONObject();
 			enemyObj.put("type", enemies[i].getType());
 			enemyObj.put("health", enemies[i].getHealth());
 			enemyObj.put("duration", enemies[i].getDuration());
 			enemyObj.put("damage", enemies[i].getDamage());
 			enemyObj.put("count", randomNum[i]);
-			enemiesArr.add(enemyObj);
+			enemiesArr.add(enemyObj;
 		}
 		
 		objLevel.put("enemies", enemiesArr);
