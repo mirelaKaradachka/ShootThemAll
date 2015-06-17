@@ -22,7 +22,8 @@ public class LevelBuilder {
 		 * проверка за валидно ниво от базата данни : userLevel = нивото до което е стигнал потребителя, но не е минал
 		 */
 		
-		if(level > maxLevel){
+		if(level > maxLevel + 1){
+
 			level = maxLevel;
 		}
 		
@@ -61,11 +62,11 @@ public class LevelBuilder {
 			
 		}
 		
-		System.out.println("level =" + level);
-		System.out.println("max level =" + maxLevel);
+		System.out.println("level" + level);
+		System.out.println("max level " + maxLevel);
 		
 		int randomBullets = rand.nextInt((maxLevel - level) * 3 + 1) + (maxLevel - level) ; 
-		System.out.println("Bonus bullets = " + randomBullets);
+		System.out.println("RB = " + randomBullets);
 		bullets += randomBullets;
 		
 		objLevel.put("bullets", bullets);
