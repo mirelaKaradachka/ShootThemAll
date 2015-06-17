@@ -16,6 +16,7 @@ public class LevelBuilder {
 		JSONObject objLevel = new JSONObject();
 		objLevel.put("userHealth", 3);
 		
+		String message = "";
 		
 
 		/*
@@ -23,8 +24,11 @@ public class LevelBuilder {
 		 */
 		
 		if(level > maxLevel + 1){
-
+			message = "Invalid level";
 			level = maxLevel;
+		}else{
+
+			message = "Success";	
 		}
 		
 		int numEnemies = 10 + ( (level - 1) * 7);
@@ -82,7 +86,7 @@ public class LevelBuilder {
 		}
 		
 		objLevel.put("enemies", enemiesArr);
-	
+		objLevel.put("message", message);
 		
 		return objLevel;
 	}
