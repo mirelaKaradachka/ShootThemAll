@@ -39,6 +39,7 @@ public class LevelsMap extends HttpServlet {
 		line = test.toJSONString();
 		
 		JSONObject result = new JSONObject();
+		JSONObject error = new JSONObject();
 
 		int numberOfAllLevels = LevelSingleton.getMaxLevel();
 
@@ -66,7 +67,7 @@ public class LevelsMap extends HttpServlet {
 
 		} catch (ParseException e) {
 
-			result.put("error", "Invalid JSON");
+			error.put("error", "Invalid JSON");
 			response.setStatus(400);
 			
 		}

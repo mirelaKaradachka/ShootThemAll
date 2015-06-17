@@ -37,6 +37,7 @@ public class GenerateLevel extends HttpServlet {
 		test.put("level", 3);
 		line = test.toJSONString();
 		
+		JSONObject error = new JSONObject();
 		JSONObject result = new JSONObject();
 		
 		JSONParser parser = new JSONParser();
@@ -54,7 +55,7 @@ public class GenerateLevel extends HttpServlet {
 			
 		} catch (ParseException e) {
 
-			result.put("error", "Invalid JSON");
+			error.put("error", "Invalid JSON");
 			response.setStatus(400);
 			
 		}

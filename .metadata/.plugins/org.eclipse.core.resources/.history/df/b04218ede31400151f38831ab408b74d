@@ -44,6 +44,7 @@ public class SaveLevelInfo extends HttpServlet {
 		
 		String message = null;
 		JSONObject result = new JSONObject();
+		JSONObject error = new JSONObject();
 		
 		JSONParser parser = new JSONParser();
 		try {
@@ -66,7 +67,7 @@ public class SaveLevelInfo extends HttpServlet {
 			
 		} catch (ParseException e) {
 
-			result.put("error", "Invalid JSON");
+			error.put("error", "Invalid JSON");
 			response.setStatus(400);
 			
 		}

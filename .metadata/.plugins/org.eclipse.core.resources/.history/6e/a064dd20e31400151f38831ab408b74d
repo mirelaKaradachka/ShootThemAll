@@ -41,8 +41,6 @@ public class WeaponsStore extends HttpServlet {
 		test.put("userId", 1);
 		line = test.toJSONString();
 		
-		JSONObject result = new JSONObject();
-		
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject userObj = (JSONObject) parser.parse(line);
@@ -67,6 +65,7 @@ public class WeaponsStore extends HttpServlet {
 			unlockedWeapons.add(new Weapon(1, 1, 0).getType());
 			unlockedWeapons.add(new Weapon(3, 3, 500).getType());
 			
+			JSONObject result = new JSONObject();
 			result.put("score", score);
 			
 
@@ -98,9 +97,8 @@ public class WeaponsStore extends HttpServlet {
 			response.getWriter().write(result.toJSONString());
 			
 		} catch (ParseException e) {
-
-			result.put("error", "Invalid JSON");
-			response.setStatus(400);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

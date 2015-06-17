@@ -39,6 +39,7 @@ public class UnlockWeapon extends HttpServlet {
 		line = test.toJSONString();
 		
 		JSONObject result = new JSONObject();
+		JSONObject error = new JSONObject();
 		String message = null;
 		
 		JSONParser parser = new JSONParser();
@@ -65,7 +66,7 @@ public class UnlockWeapon extends HttpServlet {
 			
 		} catch (ParseException e) {
 
-			result.put("error", "Invalid JSON");
+			error.put("error", "Invalid JSON");
 			response.setStatus(400);
 			
 		}

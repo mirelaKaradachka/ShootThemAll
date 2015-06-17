@@ -64,10 +64,8 @@ public class UnlockWeapon extends HttpServlet {
 			
 			
 		} catch (ParseException e) {
-
-			result.put("error", "Invalid JSON");
-			response.setStatus(400);
-			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		

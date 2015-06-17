@@ -59,8 +59,10 @@ public class ChooseWeapon extends HttpServlet {
 			
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			result.put("error", "Invalid JSON");
+			response.setStatus(400);
+			
 		}
 		
 		System.out.println(result.toJSONString());

@@ -60,18 +60,16 @@ public class SaveLevelInfo extends HttpServlet {
 			}
 			
 			message = "success";
-			result.put("message", message);
-			System.out.println(result.toJSONString());
-			response.getWriter().write(result.toJSONString());
+			
 			
 		} catch (ParseException e) {
-
-			result.put("error", "Invalid JSON");
-			response.setStatus(400);
+			message = "error";
 			
 		}
 		
-		
+		result.put("message", message);
+		System.out.println(result.toJSONString());
+		response.getWriter().write(result.toJSONString());
 	}
 
 }

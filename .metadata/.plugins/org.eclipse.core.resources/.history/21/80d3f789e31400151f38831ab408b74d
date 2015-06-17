@@ -37,8 +37,6 @@ public class GenerateLevel extends HttpServlet {
 		test.put("level", 3);
 		line = test.toJSONString();
 		
-		JSONObject result = new JSONObject();
-		
 		JSONParser parser = new JSONParser();
 		try {
 			JSONObject levelObj = (JSONObject) parser.parse(line);
@@ -46,7 +44,7 @@ public class GenerateLevel extends HttpServlet {
 			int level = Integer.parseInt(levelObj.get("level").toString());
 			
 			LevelBuilder levelBuilder = new LevelBuilder();
-			result = levelBuilder.buildLevel(userId, level);
+			JSONObject result = levelBuilder.buildLevel(userId, level);
 			
 			System.out.println(result.toJSONString());
 			response.setStatus(200);
@@ -54,7 +52,8 @@ public class GenerateLevel extends HttpServlet {
 			
 		} catch (ParseException e) {
 
-			result.put("error", "Invalid JSON");
+			JSONObject error = new JSONObject();
+			error.put("error", "Invalid JSON");
 			response.setStatus(400);
 			
 		}
