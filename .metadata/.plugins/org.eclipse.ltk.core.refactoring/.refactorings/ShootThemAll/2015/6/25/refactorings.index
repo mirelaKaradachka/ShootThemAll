@@ -2,3 +2,9 @@
 1434534143440	Rename type 'LevelFactory'
 1434534426397	Rename type 'LeaderBord'
 1434541352280	Rename type 'LevelSingleton'
+1434565533822	Rename type 'ChooseWeapon'
+1434565635230	Rename type 'MaxLevel'
+1434566166317	Rename type 'SaveLevelInfo'
+1434566319634	Delete element
+1434567499252	Rename type 'WeaponManager'
+1434567593056	Rename type 'UnlockWeapon'

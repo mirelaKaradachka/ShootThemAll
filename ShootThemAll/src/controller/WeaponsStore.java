@@ -19,7 +19,7 @@ import org.json.simple.parser.ParseException;
 /**
  * Servlet implementation class WeaponsStore
  */
-@WebServlet("/WeaponsStore")
+@WebServlet("/weaponsStore")
 public class WeaponsStore extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

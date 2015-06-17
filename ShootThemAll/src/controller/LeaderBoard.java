@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LeaderBord
  */
-@WebServlet("/LeaderBoard")
+@WebServlet("/leaderBoard")
 public class LeaderBoard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

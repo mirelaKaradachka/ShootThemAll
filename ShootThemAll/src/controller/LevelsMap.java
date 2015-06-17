@@ -15,7 +15,7 @@ import org.json.simple.parser.ParseException;
 /**
  * Servlet implementation class LevelsMap
  */
-@WebServlet("/LevelsMap")
+@WebServlet("/levelsMap")
 public class LevelsMap extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,28 +24,20 @@ public class LevelsMap extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		doPost(req, resp);
-	}
-	
-	protected void doPost(HttpServletRequest request,
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String line = request.getReader().readLine();
+		String line = request.getParameter("userId");
 
 		// test
-		JSONObject test = new JSONObject();
-		test.put("userId", 1);
-		line = test.toJSONString();
-		
+		line = "1";
+
 		JSONObject result = new JSONObject();
 
-		int numberOfAllLevels = MaxLevel.getMaxLevel();
+		int numberOfAllLevels = SettingsManager.getMaxLevel();
 
-		JSONParser parser = new JSONParser();
-		try {
-			JSONObject userIdObj = (JSONObject) parser.parse(line);
-			int userId = Integer.parseInt(userIdObj.get("userId").toString());
+		if (line != null) {
+
+			int userId = Integer.parseInt(line);
 
 			int numberOfActiveLevels = 1;
 			/*
@@ -62,11 +54,11 @@ public class LevelsMap extends HttpServlet {
 			result.put("numberOfAllLevels", numberOfAllLevels);
 			result.put("numberOfActiveLevels", numberOfActiveLevels);
 
-		} catch (ParseException e) {
+		} else {
 
 			result.put("error", "Invalid JSON");
 			response.setStatus(400);
-			
+
 		}
 		response.getWriter().write(result.toJSONString());
 	}
