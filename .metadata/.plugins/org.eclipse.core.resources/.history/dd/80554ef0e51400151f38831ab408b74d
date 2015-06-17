@@ -9,7 +9,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class LevelBuilder {
-	final int maxLevel = MaxLevel.getMaxLevel();
+	final int maxLevel = LevelSingleton.getMaxLevel();
 	
 	public JSONObject buildLevel(int userID, int level){
 		Random rand = new Random();

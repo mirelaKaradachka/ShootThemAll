@@ -40,7 +40,7 @@ public class LevelsMap extends HttpServlet {
 		
 		JSONObject result = new JSONObject();
 
-		int numberOfAllLevels = MaxLevel.getMaxLevel();
+		int numberOfAllLevels = LevelSingleton.getMaxLevel();
 
 		JSONParser parser = new JSONParser();
 		try {
