@@ -75,7 +75,8 @@ public class WeaponsStore extends HttpServlet {
 				JSONObject weaponsObj = new JSONObject();
 				weaponsObj.put("type", weapons.get(i).getType());
 				weaponsObj.put("damage", weapons.get(i).getDamage());
-				weaponsObj.put("price", weapons.get(i).getPrice());			
+				weaponsObj.put("price", weapons.get(i).getPrice());
+				
 				weaponsArr.add(weaponsObj);
 			}
 			

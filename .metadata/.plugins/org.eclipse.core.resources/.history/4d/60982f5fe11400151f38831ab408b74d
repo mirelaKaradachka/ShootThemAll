@@ -55,10 +55,10 @@ public class WeaponsStore extends HttpServlet {
 			
 			//тест -> това идва от базата данни
 			int score = 400;
-			ArrayList<Weapon> weapons = new ArrayList<Weapon>();
-			weapons.add(new Weapon(1, 1, 0));
-			weapons.add(new Weapon(2, 2, 200));
-			weapons.add(new Weapon(3, 3, 500));
+			Weapon weapons[] = new Weapon[3];
+			weapons[0] = new Weapon(1, 1, 0);
+			weapons[1] = new Weapon(2, 2, 200);
+			weapons[2] = new Weapon(3, 3, 500);
 			
 			// тест -> това идва от базата данни
 			ArrayList<Integer> unlockedWeapons = new ArrayList<Integer>();
@@ -68,26 +68,27 @@ public class WeaponsStore extends HttpServlet {
 			JSONObject result = new JSONObject();
 			result.put("score", score);
 			
-
+			JSONObject weaponsObj[] = new JSONObject[weapons.length];
 			JSONArray weaponsArr = new JSONArray();
 			
-			for(int i = 0 ; i < weapons.size(); i++){
-				JSONObject weaponsObj = new JSONObject();
-				weaponsObj.put("type", weapons.get(i).getType());
-				weaponsObj.put("damage", weapons.get(i).getDamage());
-				weaponsObj.put("price", weapons.get(i).getPrice());			
-				weaponsArr.add(weaponsObj);
+			for(int i = 0 ; i < weapons.length; i++){
+				weaponsObj[i] = new JSONObject();
+				weaponsObj[i].put("type", weapons[i].getType());
+				weaponsObj[i].put("damage", weapons[i].getDamage());
+				weaponsObj[i].put("price", weapons[i].getPrice());
+				
+				weaponsArr.add(weaponsObj[i]);
 			}
 			
 			result.put("weapons", weaponsArr);
 			
-					
+			ArrayList<JSONObject> unlockedWeaponsObj = new ArrayList<JSONObject>() ;		
 			JSONArray unlochedWeaponsArr = new JSONArray();
 			
 			for(int i = 0 ; i < unlockedWeapons.size(); i++){
-				JSONObject unlockedWeaponsObj = new JSONObject();
-				unlockedWeaponsObj.put("type", unlockedWeapons.get(i));			
-				unlochedWeaponsArr.add(unlockedWeaponsObj);
+				unlockedWeaponsObj.add(i, new JSONObject());
+				unlockedWeaponsObj.get(i).put("type", unlockedWeapons.get(i));			
+				unlochedWeaponsArr.add(unlockedWeaponsObj.get(i));
 			}
 			
 			result.put("unlockedWeapons", unlochedWeaponsArr);
