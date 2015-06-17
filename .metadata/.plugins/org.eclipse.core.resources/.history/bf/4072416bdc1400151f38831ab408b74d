@@ -60,7 +60,6 @@ public class LevelsMap extends HttpServlet {
 			result.put("numberOfAllLevels", numberOfAllLevels);
 			result.put("numberOfActiveLevels", numberOfActiveLevels);
 
-			response.setStatus(200);
 			response.getWriter().write(result.toJSONString());
 
 		} catch (ParseException e) {

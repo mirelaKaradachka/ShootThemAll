@@ -92,7 +92,6 @@ public class WeaponsStore extends HttpServlet {
 			result.put("unlockedWeapons", unlochedWeaponsArr);
 			
 			System.out.println(result.toJSONString());
-			response.setStatus(200);
 			response.getWriter().write(result.toJSONString());
 			
 		} catch (ParseException e) {

@@ -58,14 +58,17 @@ public class UnlockWeapon extends HttpServlet {
 			message = "success";
 			result.put("message", message);
 			
+			System.out.println(result.toJSONString());
+			response.setStatus(200);
+			response.getWriter().write(result.toJSONString());
+			
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		System.out.println(result.toJSONString());
-		response.getWriter().write(result.toJSONString());
+		
 	}
 
 }

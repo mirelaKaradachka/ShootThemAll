@@ -64,7 +64,6 @@ public class ChooseWeapon extends HttpServlet {
 		}
 		
 		System.out.println(result.toJSONString());
-		response.setStatus(200);
 		response.getWriter().write(result.toJSONString());
 	}
 
