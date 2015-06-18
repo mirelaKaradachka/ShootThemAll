@@ -56,7 +56,6 @@ public class WeaponManager extends HttpServlet {
 			 * потребителя като избрано оръжие
 			 * 
 			 * освен записа в базата данни променяме  оръжието и в кеша
-			 * 
 			 */
 			
 

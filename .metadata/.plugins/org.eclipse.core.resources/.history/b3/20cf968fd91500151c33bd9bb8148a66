@@ -52,7 +52,6 @@ public class UserInfoManager extends HttpServlet {
 				
 				int userId = Integer.parseInt(line);
 				
-				//използваме кеша -> друг вариант е от базата данни
 				ArrayList<User> list = (ArrayList<User>) getServletConfig()
 						.getServletContext().getAttribute("cacheUsers");
 

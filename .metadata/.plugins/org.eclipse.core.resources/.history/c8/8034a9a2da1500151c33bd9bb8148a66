@@ -42,7 +42,7 @@ public class LevelsMap extends HttpServlet {
 
 			int userId = Integer.parseInt(line);
 
-			int numberOfActiveLevels = 0;
+			int numberOfActiveLevels = 1;
 			/*
 			 * тук взимаме от потребителя нивото до което е стигнал от базата
 			 * данни
@@ -56,7 +56,6 @@ public class LevelsMap extends HttpServlet {
 				response.setStatus(400);
 
 			} else {
-				// кеш
 				ArrayList<User> list = (ArrayList<User>) getServletConfig()
 						.getServletContext().getAttribute("cacheUsers");
 

@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
 		 */
 
 		// тест
-		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 1,
+		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 0,
 				new Weapon(1, 1, 0), false);
 		User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1,
 				1, 0), false);

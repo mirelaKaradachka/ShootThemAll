@@ -50,8 +50,6 @@ public class LeaderBoard extends HttpServlet {
 			int userPosition = -1;
 
 			int count = 10;
-			
-			//използваме кеша -> друг вариант е от базата данни
 			ArrayList<User> list = (ArrayList<User>) getServletConfig()
 					.getServletContext().getAttribute("cacheUsers");
 			list.sort(new CompareUsers());
