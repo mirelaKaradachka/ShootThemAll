@@ -37,7 +37,7 @@ public class UserInfoManager extends HttpServlet {
 		
 		String line = request.getParameter("userId");
 		//test
-		line = "2";
+		line = "3";
 		
 		JSONObject result = new JSONObject();
 		

@@ -128,7 +128,7 @@ public class Login extends HttpServlet {
 			}
 
 		} catch (ParseException e) {
-			result.put("error", "Invalid JSON");
+			result.put("error", "Invalid parameter");
 			response.setStatus(400);
 		}
 

@@ -37,7 +37,7 @@ public class UserInfoManager extends HttpServlet {
 		
 		String line = request.getParameter("userId");
 		//test
-		line = "2";
+		line = "1";
 		
 		JSONObject result = new JSONObject();
 		
@@ -55,10 +55,8 @@ public class UserInfoManager extends HttpServlet {
 				ArrayList<User> list = (ArrayList<User>) getServletConfig()
 						.getServletContext().getAttribute("cacheUsers");
 
-				boolean existUser = false;
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getId() == userId) {
-						existUser = true;
 						result.put("userId", list.get(i).getId());
 						result.put("username", list.get(i).getUsername());
 						result.put("email", list.get(i).getEmail());
@@ -70,21 +68,10 @@ public class UserInfoManager extends HttpServlet {
 						userWeaponObj.put("damage", list.get(i).getWeapon().getDamage());
 						result.put("weapon", userWeaponObj);
 					}
-				}
-				
-				if(!existUser){
-					result.put("error", "Not existing id");
-					response.setStatus(400);
-				}
+				}								
 				
 			}
-			
-		}else{
-			result.put("error", "Invalid parameter");
-			response.setStatus(400);
 		}
-		
-		response.getWriter().write(result.toJSONString());
 	}
 
 	/**

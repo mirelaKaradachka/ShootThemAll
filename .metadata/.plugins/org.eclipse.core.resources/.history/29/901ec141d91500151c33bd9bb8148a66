@@ -37,7 +37,7 @@ public class UserInfoManager extends HttpServlet {
 		
 		String line = request.getParameter("userId");
 		//test
-		line = "2";
+		line = "3";
 		
 		JSONObject result = new JSONObject();
 		
@@ -73,7 +73,7 @@ public class UserInfoManager extends HttpServlet {
 				}
 				
 				if(!existUser){
-					result.put("error", "Not existing id");
+					result.put("error", "No Users ! Error");
 					response.setStatus(400);
 				}
 				
