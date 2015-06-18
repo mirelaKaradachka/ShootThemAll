@@ -108,8 +108,8 @@ public class UserInfoManager extends HttpServlet {
 		JSONObject test = new JSONObject();
 		test.put("userId", "2");
 		test.put("password", "123");
-		test.put("email", "aaa@aa");
-		test.put("allowNotification", true);
+		//test.put("email", "Petq");
+		//test.put("allowNotification", true);
 		line = test.toJSONString();
 
 		JSONObject result = new JSONObject();

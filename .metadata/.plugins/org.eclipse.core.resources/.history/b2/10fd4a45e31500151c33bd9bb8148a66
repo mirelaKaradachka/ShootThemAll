@@ -106,10 +106,10 @@ public class UserInfoManager extends HttpServlet {
 
 		// test
 		JSONObject test = new JSONObject();
-		test.put("userId", "2");
-		test.put("password", "123");
-		test.put("email", "aaa@aa");
-		test.put("allowNotification", true);
+		test.put("userId", "1");
+		test.put("password", "123456");
+		//test.put("email", "Petq");
+		//test.put("allowNotification", true);
 		line = test.toJSONString();
 
 		JSONObject result = new JSONObject();
@@ -127,7 +127,6 @@ public class UserInfoManager extends HttpServlet {
 				JSONObject userObj = (JSONObject) parser.parse(line);
 
 				int userId = Integer.parseInt(userObj.get("userId").toString());
-				System.out.println(userId);
 
 				/*
 				 * Промяна на информацията за потребителя в базата данни и в
@@ -137,11 +136,10 @@ public class UserInfoManager extends HttpServlet {
 				//използваме кеша -> друг вариант е от базата данни
 				ArrayList<User> list = (ArrayList<User>) getServletConfig()
 						.getServletContext().getAttribute("cacheUsers");
-				int user = -1;
+				User user = null;
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getId() == userId){
-						user = list.get(i).getId();
-						System.out.println("aaa " + user );
+						user = list.get(i);
 						}
 					}
 
@@ -153,8 +151,7 @@ public class UserInfoManager extends HttpServlet {
 					// - update in database  --> to do
 					
 					// - update in cache
-					list.get(user).setPassword(password);
-					getServletConfig().getServletContext().setAttribute("cacheUsers", list);
+					user.setPassword(password);
 				} catch (NullPointerException e) {
 				}
 
@@ -166,8 +163,7 @@ public class UserInfoManager extends HttpServlet {
 					// - update in database --> to do
 
 					// - update in cache
-					list.get(user).setEmail(email);
-					getServletConfig().getServletContext().setAttribute("cacheUsers", list);
+					user.setEmail(email);;
 				} catch (NullPointerException e) {
 				}
 
@@ -180,8 +176,7 @@ public class UserInfoManager extends HttpServlet {
 					// - update in database --> to do
 
 					//- update in cache
-					list.get(user).setAllowNotification(allowNotification);
-					getServletConfig().getServletContext().setAttribute("cacheUsers", list);
+					user.setAllowNotification(allowNotification);
 				} catch (NullPointerException e) {
 				}
 				

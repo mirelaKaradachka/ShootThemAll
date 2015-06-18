@@ -79,7 +79,6 @@ public class Registration extends HttpServlet {
 					
 					// добавяме в базата данни за активни оръжия 1вото оръжие
 					
-					response.setStatus(200);
 					result.put("userId", userId);
 
 				} else {
@@ -109,7 +108,6 @@ public class Registration extends HttpServlet {
 						// добавяме в базата данни за активни оръжия 1вото оръжие
 						
 						list.add(user);
-						response.setStatus(200);
 						result.put("userId", userId);
 					}
 

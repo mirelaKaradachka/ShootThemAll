@@ -29,73 +29,73 @@ public class UserInfoManager extends HttpServlet {
 
 	}
 
-//	@Override
-//	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-//			throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		doPost(req, resp);
-//	}
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// репрезентация на информацията за потребителя
-
-		String line = request.getParameter("userId");
-		// test
-		line = "2";
-
-		JSONObject result = new JSONObject();
-
-		if (line != null) {
-
-			if (getServletContext().getAttribute("cacheUsers") == null) {
-
-				result.put("error", "No Users ! Error");
-				response.setStatus(400);
-
-			} else {
-
-				int userId = Integer.parseInt(line);
-
-				// използваме кеша -> друг вариант е от базата данни
-				ArrayList<User> list = (ArrayList<User>) getServletConfig()
-						.getServletContext().getAttribute("cacheUsers");
-
-				boolean existUser = false;
-				for (int i = 0; i < list.size(); i++) {
-					if (list.get(i).getId() == userId) {
-						existUser = true;
-						result.put("userId", list.get(i).getId());
-						result.put("username", list.get(i).getUsername());
-						result.put("password", list.get(i).getPassword());
-						result.put("email", list.get(i).getEmail());
-						result.put("allowNotification", list.get(i)
-								.isAllowNotification());
-						result.put("score", list.get(i).getScore());
-						result.put("level", list.get(i).getLevel());
-						JSONObject userWeaponObj = new JSONObject();
-						userWeaponObj.put("type", list.get(i).getWeapon()
-								.getType());
-						userWeaponObj.put("damage", list.get(i).getWeapon()
-								.getDamage());
-						result.put("weapon", userWeaponObj);
-					}
-				}
-
-				if (!existUser) {
-					result.put("error", "Not existing id");
-					response.setStatus(400);
-				}
-
-			}
-
-		} else {
-			result.put("error", "Invalid parameter");
-			response.setStatus(400);
-		}
-
-		response.getWriter().write(result.toJSONString());
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doPost(req, resp);
 	}
+
+//	protected void doGet(HttpServletRequest request,
+//			HttpServletResponse response) throws ServletException, IOException {
+//		// репрезентация на информацията за потребителя
+//
+//		String line = request.getParameter("userId");
+//		// test
+//		line = "2";
+//
+//		JSONObject result = new JSONObject();
+//
+//		if (line != null) {
+//
+//			if (getServletContext().getAttribute("cacheUsers") == null) {
+//
+//				result.put("error", "No Users ! Error");
+//				response.setStatus(400);
+//
+//			} else {
+//
+//				int userId = Integer.parseInt(line);
+//
+//				// използваме кеша -> друг вариант е от базата данни
+//				ArrayList<User> list = (ArrayList<User>) getServletConfig()
+//						.getServletContext().getAttribute("cacheUsers");
+//
+//				boolean existUser = false;
+//				for (int i = 0; i < list.size(); i++) {
+//					if (list.get(i).getId() == userId) {
+//						existUser = true;
+//						result.put("userId", list.get(i).getId());
+//						result.put("username", list.get(i).getUsername());
+//						result.put("password", list.get(i).getPassword());
+//						result.put("email", list.get(i).getEmail());
+//						result.put("allowNotification", list.get(i)
+//								.isAllowNotification());
+//						result.put("score", list.get(i).getScore());
+//						result.put("level", list.get(i).getLevel());
+//						JSONObject userWeaponObj = new JSONObject();
+//						userWeaponObj.put("type", list.get(i).getWeapon()
+//								.getType());
+//						userWeaponObj.put("damage", list.get(i).getWeapon()
+//								.getDamage());
+//						result.put("weapon", userWeaponObj);
+//					}
+//				}
+//
+//				if (!existUser) {
+//					result.put("error", "Not existing id");
+//					response.setStatus(400);
+//				}
+//
+//			}
+//
+//		} else {
+//			result.put("error", "Invalid parameter");
+//			response.setStatus(400);
+//		}
+//
+//		response.getWriter().write(result.toJSONString());
+//	}
 
 	
 	protected void doPost(HttpServletRequest request,
