@@ -108,8 +108,8 @@ public class UserInfoManager extends HttpServlet {
 		JSONObject test = new JSONObject();
 		test.put("userId", "2");
 		test.put("password", "123");
-		//test.put("email", "aaa@aa");
-		//test.put("allowNotification", true);
+		test.put("email", "aaa@aa");
+		test.put("allowNotification", true);
 		line = test.toJSONString();
 
 		JSONObject result = new JSONObject();
@@ -127,6 +127,7 @@ public class UserInfoManager extends HttpServlet {
 				JSONObject userObj = (JSONObject) parser.parse(line);
 
 				int userId = Integer.parseInt(userObj.get("userId").toString());
+				System.out.println(userId);
 
 				/*
 				 * Промяна на информацията за потребителя в базата данни и в
@@ -140,6 +141,7 @@ public class UserInfoManager extends HttpServlet {
 				for (int i = 0; i < list.size(); i++) {
 					if (list.get(i).getId() == userId){
 						user = list.get(i).getId();
+						System.out.println("aaa " + user );
 						}
 					}
 
