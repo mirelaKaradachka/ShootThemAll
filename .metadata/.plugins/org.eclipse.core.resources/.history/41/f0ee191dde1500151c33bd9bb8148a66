@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.User;
-import model.Weapon;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,13 +24,6 @@ public class Registration extends HttpServlet {
 
 	public Registration() {
 
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -58,28 +50,14 @@ public class Registration extends HttpServlet {
 			if (!username.isEmpty() && !password.isEmpty() && !email.isEmpty()) {
 
 				/*
-				 * Проверка дали този username e зает 
-				 * Проверкa в базата данни или
+				 * Проверка дали този username e зает Проверк в базата данни или
 				 * в хеша
 				 */
 
 				// проверка в хеша
 				if (getServletContext().getAttribute("cacheUsers") == null) {
-					
 					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
-					
-					// това идва като резултат от INSERT ... SELECT
-					int userId = 6;
-					User user = new User(userId, username, password, email, 0, 0, new Weapon(1, 1, 1), false);
-					
-				    ArrayList<User> cacheUsers = new ArrayList<User>();
-				    cacheUsers.add(user);
-					getServletConfig().getServletContext().setAttribute("cacheUsers", cacheUsers);
-					
-					// добавяме в базата данни за активни оръжия 1вото оръжие
-					
-					result.put("userId", userId);
 
 				} else {
 
@@ -97,18 +75,8 @@ public class Registration extends HttpServlet {
 						result.put("error", "Existing username");
 						response.setStatus(400);
 					}else{
-						
 						// няма такъв потребител = > insert в базата данни и
 						// добавяне в хеша
-						
-						// това идва като резултат от INSERT ... SELECT
-						int userId = 6;
-						User user = new User(userId, username, password, email, 0, 0, new Weapon(1, 1, 1), false);
-						
-						// добавяме в базата данни за активни оръжия 1вото оръжие
-						
-						list.add(user);
-						result.put("userId", userId);
 					}
 
 				}
