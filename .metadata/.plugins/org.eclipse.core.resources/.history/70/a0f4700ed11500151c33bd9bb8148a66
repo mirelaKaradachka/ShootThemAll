@@ -45,8 +45,8 @@ public class Login extends HttpServlet {
         
         //тест
         User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 0, new Weapon(1, 1, 0), false);
-        User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1, 1, 0), false);
-        User u3 = new User(3, "Tanq", "Tanq", "Tanq", 14, 0, new Weapon(1, 1, 0), false);
+        User u2 = new User(1, "Petko", "Petko", "Petko", 10, 0, new Weapon(1, 1, 0), false);
+        User u3 = new User(1, "Tanq", "Tanq", "Tanq", 14, 0, new Weapon(1, 1, 0), false);
         
         //cacheUsers.sort(new CompareUsers());
         config = getServletConfig();

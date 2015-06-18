@@ -45,8 +45,8 @@ public class Login extends HttpServlet {
         
         //тест
         User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 0, new Weapon(1, 1, 0), false);
-        User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1, 1, 0), false);
-        User u3 = new User(3, "Tanq", "Tanq", "Tanq", 14, 0, new Weapon(1, 1, 0), false);
+        User u2 = new User(1, "Petko", "Petko", "Petko", 10, 0, new Weapon(1, 1, 0), false);
+        User u3 = new User(1, "Tanq", "Tanq", "Tanq", 14, 0, new Weapon(1, 1, 0), false);
         
         //cacheUsers.sort(new CompareUsers());
         config = getServletConfig();
@@ -65,6 +65,16 @@ public class Login extends HttpServlet {
         //sc.setAttribute("cacheUsers", cacheUsers);
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    		throws ServletException, IOException {
+    	
+    	ArrayList<User> list = (ArrayList<User>) getServletConfig().getServletContext().getAttribute("cacheUsers");
+    	for (Iterator<User> i = list.iterator(); i.hasNext();) {
+    		User u = i.next();
+			System.out.println(u.getUsername() + " " + u.getScore() + " " + (cacheUsers.indexOf(u)+1));
+		}
+    }
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

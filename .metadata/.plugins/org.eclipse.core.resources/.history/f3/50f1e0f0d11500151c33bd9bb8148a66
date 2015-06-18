@@ -49,18 +49,19 @@ public class LeaderBoard extends HttpServlet {
 			int userId = Integer.parseInt(line);
 			int userPosition = -1;
 
-			int count = 10;
+			int count = 2;
 			ArrayList<User> list = (ArrayList<User>) getServletConfig()
 					.getServletContext().getAttribute("cacheUsers");
-			list.sort(new CompareUsers());
 			for (Iterator<User> i = list.iterator(); i.hasNext();) {
 				User u = i.next();
+				// System.out.println(u.getUsername() + " " + u.getScore() + " "
+				// + (list.indexOf(u)+1));
 				if (u.getId() == userId) {
 					userPosition = list.indexOf(u);
-
+					System.out.println(userPosition);
 				}
 				
-				if (count > 0) {
+				if (count > 10) {
 					JSONObject userObj = new JSONObject();
 					userObj.put("position", list.indexOf(u) + 1);
 					userObj.put("username", u.getUsername());
@@ -83,7 +84,7 @@ public class LeaderBoard extends HttpServlet {
 
 		}else{
 			response.setStatus(400);
-			error.put("error", "Invalid parameter");
+			error.put("errorr", "Invalid input");
 		}
 		
 		System.out.println(result.toJSONString());

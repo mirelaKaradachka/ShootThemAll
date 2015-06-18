@@ -52,9 +52,9 @@ public class LeaderBoard extends HttpServlet {
 			int count = 10;
 			ArrayList<User> list = (ArrayList<User>) getServletConfig()
 					.getServletContext().getAttribute("cacheUsers");
-			list.sort(new CompareUsers());
 			for (Iterator<User> i = list.iterator(); i.hasNext();) {
 				User u = i.next();
+				System.out.println("aaa");
 				if (u.getId() == userId) {
 					userPosition = list.indexOf(u);
 
@@ -83,7 +83,7 @@ public class LeaderBoard extends HttpServlet {
 
 		}else{
 			response.setStatus(400);
-			error.put("error", "Invalid parameter");
+			error.put("errorr", "Invalid input");
 		}
 		
 		System.out.println(result.toJSONString());
