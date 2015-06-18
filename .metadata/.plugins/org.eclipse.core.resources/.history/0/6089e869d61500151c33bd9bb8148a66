@@ -76,8 +76,8 @@ public class Login extends HttpServlet {
 
 		// test
 		JSONObject test = new JSONObject();
-		test.put("username", "Tanq");
-		test.put("password", "Tanq");
+		test.put("username", "Ivan");
+		test.put("password", "123");
 		line = test.toJSONString();
 
 		JSONObject result = new JSONObject();
@@ -97,10 +97,10 @@ public class Login extends HttpServlet {
 			} else {
 
 				if (username.isEmpty() && password.isEmpty()) {
-
+					
 					result.put("error", "Empty fields");
 					response.setStatus(400);
-
+					
 				} else {
 
 					boolean existUser = false;
@@ -131,10 +131,10 @@ public class Login extends HttpServlet {
 			result.put("error", "Invalid parameter");
 			response.setStatus(400);
 		}
-
+		
 		response.getWriter().write(result.toJSONString());
 	}
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
