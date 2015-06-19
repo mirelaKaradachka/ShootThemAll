@@ -25,20 +25,6 @@ public class User {
 		setAllowNotification(allowNotification);
 		date = new Date();
 	}
-	
-	public User(int id, String username, String password, String email,
-			int score, int level, Weapon weapon, boolean allowNotification, Date date) {
-		this.id = id;
-		this.username = username;
-		setPassword(password);
-		setEmail(email);
-		setScore(score);
-		setLevel(level);
-		setWeapon(weapon);
-		setAllowNotification(allowNotification);
-		setDate(date);
-	}
-
 
 	//get
 	public int getId() {
@@ -112,14 +98,7 @@ public class User {
 		this.allowNotification = allowNotification;
 	}
 	
-	private void setDate(Date date) {
-		if(!date.equals(null)){
-			this.date = date;
-		}else{
-			this.date = new Date();
-		}
-		
-	}
+	
 	
 
 }
