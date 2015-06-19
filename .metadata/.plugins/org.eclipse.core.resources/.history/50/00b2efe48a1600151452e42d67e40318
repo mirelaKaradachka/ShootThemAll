@@ -1,0 +1,59 @@
+package cache;
+
+import java.util.ArrayList;
+
+import controller.UsersComparator;
+import model.User;
+
+public class Cache implements ICache{
+	private ArrayList<User> users;
+	private static Cache cache;
+	
+	private Cache(){
+		users = new ArrayList<User>();
+	}
+
+	@Override
+	public User getUser(int userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteUser(int userId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public static Cache getCache() {
+		if(cache == null){
+			cache = new Cache();
+		}
+		return cache;
+	}
+
+	@Override
+	public ArrayList<User> getAllUsers() {
+		return users;
+	}
+
+	@Override
+	public void sort() {
+		users.sort(new UsersComparator());
+		
+	}
+	
+}

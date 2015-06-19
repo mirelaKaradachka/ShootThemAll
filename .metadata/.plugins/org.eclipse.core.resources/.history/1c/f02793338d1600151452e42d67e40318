@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -11,13 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import cache.Cache;
+import model.User;
+import model.Weapon;
 
 /**
  * Servlet implementation class Login
@@ -25,8 +26,7 @@ import cache.Cache;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//private ArrayList<User> cacheUsers;
-	private Cache cache;
+	private ArrayList<User> cacheUsers;
 	private ServletConfig config;
 	private ServletContext sc;
 
@@ -41,40 +41,35 @@ public class Login extends HttpServlet {
 		
 		System.out.println("cache init");
 		
-//		if (cacheUsers == null) {
-//			cacheUsers = new ArrayList();
-//		}
+		if (cacheUsers == null) {
+			cacheUsers = new ArrayList();
+		}
 		/*
 		 * вземане на потребителите от базата данни и пълнене на cacheUsers
 		 */
 
 		// тест
-//		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 1,
-//				new Weapon(1, 1, 0), false);
-//		User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1,
-//				1, 0), false);
-//		User u3 = new User(3, "Tanq", "Tanq", "Tanq", 14, 0,
-//				new Weapon(1, 1, 0), false);
+		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 1,
+				new Weapon(1, 1, 0), false);
+		User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1,
+				1, 0), false);
+		User u3 = new User(3, "Tanq", "Tanq", "Tanq", 14, 0,
+				new Weapon(1, 1, 0), false);
 
-		cache = Cache.getCache();
-		cache.init();
-		
+
 		config = getServletConfig();
 
 		sc = config.getServletContext();
-		
-		
 
 		if (sc.getAttribute("cacheUsers") == null) {
-			//sc.setAttribute("cacheUsers", cacheUsers);
-			sc.setAttribute("cacheUsers", cache);
+			sc.setAttribute("cacheUsers", cacheUsers);
 		}
 
-//		cacheUsers = (ArrayList<User>) sc.getAttribute("cacheUsers");
-//		cacheUsers.add(u1);
-//		cacheUsers.add(u2);
-//		cacheUsers.add(u3);
-//		cacheUsers.sort(new UsersComparator());
+		cacheUsers = (ArrayList<User>) sc.getAttribute("cacheUsers");
+		cacheUsers.add(u1);
+		cacheUsers.add(u2);
+		cacheUsers.add(u3);
+		cacheUsers.sort(new UsersComparator());
 		// sc.setAttribute("cacheUsers", cacheUsers);
 	}
 
@@ -97,8 +92,8 @@ public class Login extends HttpServlet {
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
 
-			if (getServletContext().getAttribute("cacheUsers") == null || Cache.getCache().isEmpty()) {
-						
+			if (getServletContext().getAttribute("cacheUsers") == null) {
+
 				result.put("error", "Invalid username or password");
 				response.setStatus(400);
 
@@ -114,28 +109,17 @@ public class Login extends HttpServlet {
 					boolean existUser = false;
 					int userId = -1;
 					
-//					//използваме кеша -> друг вариант е от базата данни
-//					ArrayList<User> list = (ArrayList<User>) getServletConfig()
-//							.getServletContext().getAttribute("cacheUsers");
-//
-//					for (int i = 0; i < list.size(); i++) {
-//						if (list.get(i).getUsername().equals(username)
-//								&& list.get(i).getPassword().equals(password)) {
-//							userId = list.get(i).getId();
-//							existUser = true;
-//						}
-//					}
-//
-//					if (existUser) {
-//						result.put("userId", userId);
-//						response.setStatus(200);
-//					} else {
-//						result.put("error", "Invalid username or password");
-//						response.setStatus(400);
-//					}
-					
-					existUser = Cache.getCache().existUser(username, password);
-					userId = Cache.getCache().getUserId(username);
+					//използваме кеша -> друг вариант е от базата данни
+					ArrayList<User> list = (ArrayList<User>) getServletConfig()
+							.getServletContext().getAttribute("cacheUsers");
+
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getUsername().equals(username)
+								&& list.get(i).getPassword().equals(password)) {
+							userId = list.get(i).getId();
+							existUser = true;
+						}
+					}
 
 					if (existUser) {
 						result.put("userId", userId);
@@ -144,7 +128,6 @@ public class Login extends HttpServlet {
 						result.put("error", "Invalid username or password");
 						response.setStatus(400);
 					}
-					
 
 				}
 			}

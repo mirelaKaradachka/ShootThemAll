@@ -97,8 +97,8 @@ public class Login extends HttpServlet {
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
 
-			if (getServletContext().getAttribute("cacheUsers") == null || Cache.getCache().isEmpty()) {
-						
+			if (getServletContext().getAttribute("cacheUsers") == null) {
+
 				result.put("error", "Invalid username or password");
 				response.setStatus(400);
 
@@ -114,28 +114,17 @@ public class Login extends HttpServlet {
 					boolean existUser = false;
 					int userId = -1;
 					
-//					//използваме кеша -> друг вариант е от базата данни
-//					ArrayList<User> list = (ArrayList<User>) getServletConfig()
-//							.getServletContext().getAttribute("cacheUsers");
-//
-//					for (int i = 0; i < list.size(); i++) {
-//						if (list.get(i).getUsername().equals(username)
-//								&& list.get(i).getPassword().equals(password)) {
-//							userId = list.get(i).getId();
-//							existUser = true;
-//						}
-//					}
-//
-//					if (existUser) {
-//						result.put("userId", userId);
-//						response.setStatus(200);
-//					} else {
-//						result.put("error", "Invalid username or password");
-//						response.setStatus(400);
-//					}
-					
-					existUser = Cache.getCache().existUser(username, password);
-					userId = Cache.getCache().getUserId(username);
+					//използваме кеша -> друг вариант е от базата данни
+					ArrayList<User> list = (ArrayList<User>) getServletConfig()
+							.getServletContext().getAttribute("cacheUsers");
+
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).getUsername().equals(username)
+								&& list.get(i).getPassword().equals(password)) {
+							userId = list.get(i).getId();
+							existUser = true;
+						}
+					}
 
 					if (existUser) {
 						result.put("userId", userId);
@@ -144,7 +133,6 @@ public class Login extends HttpServlet {
 						result.put("error", "Invalid username or password");
 						response.setStatus(400);
 					}
-					
 
 				}
 			}

@@ -1,0 +1,128 @@
+package cache;
+
+import java.util.ArrayList;
+
+import controller.UsersComparator;
+import model.User;
+import model.Weapon;
+
+public class Cache implements ICache {
+	private ArrayList<User> users;
+	private static Cache cache;
+
+	private Cache() {
+		users = new ArrayList<User>();
+	}
+
+	@Override
+	public User getUser(int userId) {
+		User result = null;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == userId) {
+				result = users.get(i);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public void addUser(User user) {
+		users.add(user);
+
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		int index = -1;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == user.getId()) {
+				index = i;
+			}
+		}
+
+		users.remove(index);
+	}
+
+	@Override
+	public void deleteUser(int userId) {
+		int index = -1;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == userId) {
+				index = i;
+			}
+		}
+
+		users.remove(index);
+
+	}
+
+	public static Cache getCache() {
+		if (cache == null) {
+			cache = new Cache();
+		}
+		return cache;
+	}
+
+	@Override
+	public ArrayList<User> getAllUsers() {
+		return users;
+	}
+
+	@Override
+	public void sort() {
+		users.sort(new UsersComparator());
+
+	}
+
+	@Override
+	public void init() {
+		// тук си го пълним с потребители от базата данни
+
+		// тест
+		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 1,
+				new Weapon(1, 1, 0), false);
+		User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1,
+				1, 0), false);
+		User u3 = new User(3, "Tanq", "Tanq", "Tanq", 14, 0,
+				new Weapon(1, 1, 0), false);
+
+		users.add(u1);
+		users.add(u2);
+		users.add(u3);
+		sort();
+
+	}
+
+	@Override
+	public void update(String type, String value, int userId) {
+		User user = getUser(userId);
+
+		if (type.equals("password")) {
+			user.setPassword(value);
+		}
+
+		if (type.equals("email")) {
+			user.setEmail(value);
+		}
+
+		if (type.equals("allowNotification")) {
+			boolean val = Boolean.parseBoolean(value);
+			user.setAllowNotification(val);
+		}
+
+	}
+
+	@Override
+	public boolean existUser(String username, String password) {
+		boolean result = false;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUsername().equals(username)
+					&& users.get(i).getPassword().equals(password)) {
+				result = true;
+			}
+		}
+
+		return result;
+
+	}
+}

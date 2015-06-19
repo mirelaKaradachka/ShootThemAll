@@ -1,0 +1,16 @@
+package cache;
+
+import java.util.ArrayList;
+
+import model.User;
+
+public interface ICache {
+	void init();
+	User getUser(int userId);
+	void addUser(User user);
+	void deleteUser(User user);
+	void deleteUser(int userId);
+	
+    ArrayList<User> getAllUsers();
+    void sort();
+}

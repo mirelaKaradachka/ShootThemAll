@@ -1,0 +1,83 @@
+package cache;
+
+import java.util.ArrayList;
+
+import controller.UsersComparator;
+import model.User;
+
+public class Cache implements ICache{
+	private ArrayList<User> users;
+	private static Cache cache;
+	
+	private Cache(){
+		users = new ArrayList<User>();
+	}
+
+	@Override
+	public User getUser(int userId) {
+		User result = null;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == userId) {
+				result = users.get(i);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public void addUser(User user) {
+		users.add(user);
+		
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		int index = -1;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == user.getId()) {
+				index = i;
+			}
+		}
+		
+		users.remove(index);
+	}
+
+	@Override
+	public void deleteUser(int userId) {
+		int index = -1;
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == userId) {
+				index = i;
+			}
+		}
+		
+		users.remove(index);
+		
+	}
+
+
+	public static Cache getCache() {
+		if(cache == null){
+			cache = new Cache();
+		}
+		return cache;
+	}
+
+	@Override
+	public ArrayList<User> getAllUsers() {
+		return users;
+	}
+
+	@Override
+	public void sort() {
+		users.sort(new UsersComparator());
+		
+	}
+
+	@Override
+	public void init() {
+		// tuk si go pylnim s neshta ot bazata danni
+		
+	}
+	
+}

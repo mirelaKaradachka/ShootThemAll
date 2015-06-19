@@ -84,7 +84,7 @@ public class Login extends HttpServlet {
 
 		// test
 		JSONObject test = new JSONObject();
-		test.put("username", "Tanq");
+		test.put("username", "Tanq4");
 		test.put("password", "Tanq");
 		line = test.toJSONString();
 
@@ -97,8 +97,8 @@ public class Login extends HttpServlet {
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
 
-			if (getServletContext().getAttribute("cacheUsers") == null || Cache.getCache().isEmpty()) {
-						
+			if (getServletContext().getAttribute("cacheUsers") == null) {
+
 				result.put("error", "Invalid username or password");
 				response.setStatus(400);
 

@@ -97,8 +97,8 @@ public class Login extends HttpServlet {
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
 
-			if (getServletContext().getAttribute("cacheUsers") == null || Cache.getCache().isEmpty()) {
-						
+			if (getServletContext().getAttribute("cacheUsers") == null) {
+
 				result.put("error", "Invalid username or password");
 				response.setStatus(400);
 
@@ -125,17 +125,6 @@ public class Login extends HttpServlet {
 //							existUser = true;
 //						}
 //					}
-//
-//					if (existUser) {
-//						result.put("userId", userId);
-//						response.setStatus(200);
-//					} else {
-//						result.put("error", "Invalid username or password");
-//						response.setStatus(400);
-//					}
-					
-					existUser = Cache.getCache().existUser(username, password);
-					userId = Cache.getCache().getUserId(username);
 
 					if (existUser) {
 						result.put("userId", userId);
@@ -144,7 +133,6 @@ public class Login extends HttpServlet {
 						result.put("error", "Invalid username or password");
 						response.setStatus(400);
 					}
-					
 
 				}
 			}
