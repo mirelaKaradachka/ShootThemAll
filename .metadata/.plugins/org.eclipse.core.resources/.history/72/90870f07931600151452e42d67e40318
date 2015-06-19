@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class User {
 	private final int id;
 	private final String username;
@@ -11,8 +9,9 @@ public class User {
 	private int level;
 	private Weapon weapon;
 	private boolean allowNotification;
-	private Date date;
-		
+	
+	
+	
 	public User(int id, String username, String password, String email,
 			int score, int level, Weapon weapon, boolean allowNotification) {
 		this.id = id;
@@ -23,7 +22,6 @@ public class User {
 		setLevel(level);
 		setWeapon(weapon);
 		setAllowNotification(allowNotification);
-		date = new Date();
 	}
 
 	//get
@@ -57,10 +55,6 @@ public class User {
 	
 	public boolean isAllowNotification() {
 		return allowNotification;
-	}
-	
-	public Date getDate() {
-		return date;
 	}
 
 	//set

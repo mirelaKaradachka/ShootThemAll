@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.User;
-import model.Weapon;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -141,26 +140,10 @@ public class Login extends HttpServlet {
 					if (existUser) {
 						result.put("userId", userId);
 						response.setStatus(200);
-						//System.out.println(Cache.getCache().getUser(userId).getDate());
+						System.out.println(Cache.getCache().getUser(userId).getDate());
 					} else {
-						
-						// Тук проверяваме в базата данни дали съществува този потребител
-						
-						boolean existInDB = false;
-						if(existInDB){
-							
-							//potrebitel ot selekta v bazata danni -> testov
-							User user = new User(12, "Sonq", "Sonq", "Sonq", 100, 3, new Weapon(1, 1, 0), false);
-							
-							Cache.getCache().addUser(user);
-							result.put("userId", userId);
-							response.setStatus(200);
-						}else{
-							result.put("error", "Invalid username or password");
-							response.setStatus(400);							
-						}
-						
-						
+						result.put("error", "Invalid username or password");
+						response.setStatus(400);
 					}
 					
 

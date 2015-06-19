@@ -1,8 +1,6 @@
 package cache;
 
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import controller.UsersComparator;
 import model.User;
@@ -32,9 +30,7 @@ public class Cache implements ICache {
 		if(users.size() < 20){
 			users.add(user);
 		}else{
-			User index = getUser(getLastActiveUserId());
-			deleteUser(index);
-			users.add(user);
+			
 		}
 
 	}
@@ -172,17 +168,5 @@ public class Cache implements ICache {
 	@Override
 	public boolean isEmpty() {		
 		return users.isEmpty();
-	}
-	
-	public int getLastActiveUserId(){
-		int result = -1;
-		Date date = new Date();
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).getDate().before(date)) {
-				date = users.get(i).getDate();
-				result = users.get(i).getId();
-			}
-		}
-		return result;
 	}
 }

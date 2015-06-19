@@ -148,8 +148,7 @@ public class Login extends HttpServlet {
 						
 						boolean existInDB = false;
 						if(existInDB){
-							
-							//potrebitel ot selekta v bazata danni -> testov
+							//potrebitel ot selekta v bazata danni 
 							User user = new User(12, "Sonq", "Sonq", "Sonq", 100, 3, new Weapon(1, 1, 0), false);
 							
 							Cache.getCache().addUser(user);
