@@ -84,8 +84,7 @@ public class Cache implements ICache {
 
 	@Override
 	public void init() {
-		// тук си го пълним с потребители от базата данни 
-		//слагаме 20те с най- скорошна активност
+		// тук си го пълним с потребители от базата данни
 
 		// тест
 		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 1,
