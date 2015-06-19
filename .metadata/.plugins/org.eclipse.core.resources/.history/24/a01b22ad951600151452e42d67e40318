@@ -151,7 +151,6 @@ public class Login extends HttpServlet {
 							
 							//potrebitel ot selekta v bazata danni -> testov
 							User user = new User(12, "Sonq", "Sonq", "Sonq", 100, 3, new Weapon(1, 1, 0), false);
-							//update na datata v bazata danni za tozi potrebitel
 							
 							Cache.getCache().addUser(user);
 							result.put("userId", userId);
