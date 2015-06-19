@@ -38,9 +38,6 @@ public class Login extends HttpServlet {
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
-		
-		System.out.println("cache init");
-		
 		if (cacheUsers == null) {
 			cacheUsers = new ArrayList();
 		}
