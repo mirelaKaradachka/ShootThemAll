@@ -19,7 +19,7 @@ id int not null auto_increment,
 damage int not null,
 price int not null,
 primary key (id)
-);
+); 
 
 create table UnlockedWeapons( 
 user_id int not null,
