@@ -72,12 +72,7 @@ public class Login extends HttpServlet {
 			//sc.setAttribute("cacheUsers", cacheUsers);
 			
 			//това за да не счупя написането до тук :)
-			User[] arr = (User[]) cache.getAllUsers().toArray();
-			ArrayList<User> list = new ArrayList<User>();
-			for(int i = 0 ; i < arr.length; i++){
-				list.add(arr[i]);
-			}
-			sc.setAttribute("cacheUsers", list);
+			sc.setAttribute("cacheUsers", cache.getAllUsers());
 		}
 
 //		cacheUsers = (ArrayList<User>) sc.getAttribute("cacheUsers");
