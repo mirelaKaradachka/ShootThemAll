@@ -104,8 +104,43 @@ public class LevelManager extends HttpServlet {
 				 */
 
 				// мейл тест
-				sendEmail("shootthemallgame@gmail.com", "tsvetelina.petkova91@gmail.com", "Game massage", "You are looser !");
-				
+				final String meilusername = "tsvetelina.petkova91@gmail.com";
+				final String meilpassword = "a9109123238";
+				Properties props = new Properties();
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+
+				String msgBody = "...";
+
+				Session session = Session.getInstance(props,
+						new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(meilusername,
+										meilpassword);
+							}
+						});
+
+				try {
+
+					Message meilMessage = new MimeMessage(session);
+					meilMessage.setFrom(new InternetAddress(
+							"tsvetelina.petkova91@gmail.com"));
+					meilMessage.setRecipients(Message.RecipientType.TO,
+							InternetAddress
+									.parse("tsvetelina.petkova91@gmail.com"));
+					meilMessage.setSubject("Testing Subject");
+					meilMessage.setText("Dear Mail Crawler,"
+							+ "\n\n No spam to my email, please!");
+
+					Transport.send(meilMessage);
+
+					System.out.println("Done");
+
+				} catch (MessagingException e) {
+					// throw new RuntimeException(e);
+				}
 
 			}
 
@@ -127,8 +162,8 @@ public class LevelManager extends HttpServlet {
 	public void sendEmail(String fromEmailAddr, String toEmailAddr,
 			String subject, String body) {
 
-		final String meilusername = "shootthemallgame@gmail.com";
-		final String meilpassword = "shoot123";
+		final String meilusername = "tsvetelina.petkova91@gmail.com";
+		final String meilpassword = "a9109123238";
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
@@ -146,13 +181,12 @@ public class LevelManager extends HttpServlet {
 		MimeMessage message = new MimeMessage(session);
 		try {
 			
-			message.setFrom(new InternetAddress(fromEmailAddr));
+			//message.setFrom(new InternetAddress(fromEmailAddr));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					toEmailAddr));
 			message.setSubject(subject);
 			message.setText(body);
 			Transport.send(message);
-			System.out.println("Send email :)");
 		} catch (MessagingException ex) {
 			System.err.println("Cannot send email. " + ex);
 		}

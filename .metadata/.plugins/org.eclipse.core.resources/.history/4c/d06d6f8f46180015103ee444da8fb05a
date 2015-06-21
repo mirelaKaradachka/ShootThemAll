@@ -104,7 +104,7 @@ public class LevelManager extends HttpServlet {
 				 */
 
 				// мейл тест
-				sendEmail("shootthemallgame@gmail.com", "tsvetelina.petkova91@gmail.com", "Game massage", "You are looser !");
+				sendEmail("shootthemallgame@gmail.com", "tsvetelina.petkova91@gmail.com", "aaaa", "bbbb");
 				
 
 			}

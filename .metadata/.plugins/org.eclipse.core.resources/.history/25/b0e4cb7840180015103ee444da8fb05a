@@ -8,7 +8,6 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
@@ -32,43 +31,36 @@ public class LevelManager extends HttpServlet {
 
 	}
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(req, resp);
-	}
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String user = request.getParameter("userId");
+		String userLevel = request.getParameter("level");
 
-	// protected void doGet(HttpServletRequest request,
-	// HttpServletResponse response) throws ServletException, IOException {
-	// String user = request.getParameter("userId");
-	// String userLevel = request.getParameter("level");
-	//
-	// // test
-	// user = "1";
-	// userLevel = "2";
-	//
-	// JSONObject result = new JSONObject();
-	//
-	// if (user != null && userLevel != null) {
-	//
-	// int userId = Integer.parseInt(user);
-	// int level = Integer.parseInt(userLevel);
-	//
-	// LevelBuilder levelBuilder = new LevelBuilder();
-	// result = levelBuilder.buildLevel(userId, level);
-	//
-	// response.setStatus(200);
-	//
-	// } else {
-	//
-	// response.setStatus(400);
-	// result.put("error", "Invalid parameter");
-	// }
-	//
-	// System.out.println(result.toJSONString());
-	// response.getWriter().write(result.toJSONString());
-	// }
+		// test
+		user = "1";
+		userLevel = "2";
+
+		JSONObject result = new JSONObject();
+
+		if (user != null && userLevel != null) {
+
+			int userId = Integer.parseInt(user);
+			int level = Integer.parseInt(userLevel);
+
+			LevelBuilder levelBuilder = new LevelBuilder();
+			result = levelBuilder.buildLevel(userId, level);
+
+			response.setStatus(200);
+
+		} else {
+
+			response.setStatus(400);
+			result.put("error", "Invalid parameter");
+		}
+
+		System.out.println(result.toJSONString());
+		response.getWriter().write(result.toJSONString());
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -104,8 +96,40 @@ public class LevelManager extends HttpServlet {
 				 */
 
 				// мейл тест
-				sendEmail("shootthemallgame@gmail.com", "tsvetelina.petkova91@gmail.com", "Game massage", "You are looser !");
-				
+				final String username = "tsvetelina.petkova91@gmail.com";
+				final String password = "a9109123238";
+
+				Properties props = new Properties();
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.starttls.enable", "true");
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.port", "587");
+
+				Session session = Session.getInstance(props,
+						new javax.mail.Authenticator() {
+							protected PasswordAuthentication getPasswordAuthentication() {
+								return new PasswordAuthentication(username,
+										password);
+							}
+						});
+
+				try {
+
+					Message meilMessage = new MimeMessage(session);
+					meilMessage.setFrom(new InternetAddress("tsvetelina.petkova91@gmail.com"));
+					meilMessage.setRecipients(Message.RecipientType.TO,
+							InternetAddress.parse("tsvetelina.petkova91@gmail.com"));
+					meilMessage.setSubject("Testing Subject");
+					meilMessage.setText("Dear Mail Crawler,"
+							+ "\n\n No spam to my email, please!");
+
+					Transport.send(meilMessage);
+
+					System.out.println("Done");
+
+				} catch (MessagingException e) {
+					throw new RuntimeException(e);
+				}
 
 			}
 
@@ -122,40 +146,6 @@ public class LevelManager extends HttpServlet {
 		System.out.println(result.toJSONString());
 		response.getWriter().write(result.toJSONString());
 
-	}
-
-	public void sendEmail(String fromEmailAddr, String toEmailAddr,
-			String subject, String body) {
-
-		final String meilusername = "shootthemallgame@gmail.com";
-		final String meilpassword = "shoot123";
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-
-		Session session = Session.getDefaultInstance(props,
-				new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(meilusername,
-						meilpassword);
-			}
-		});
-		
-		MimeMessage message = new MimeMessage(session);
-		try {
-			
-			message.setFrom(new InternetAddress(fromEmailAddr));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
-					toEmailAddr));
-			message.setSubject(subject);
-			message.setText(body);
-			Transport.send(message);
-			System.out.println("Send email :)");
-		} catch (MessagingException ex) {
-			System.err.println("Cannot send email. " + ex);
-		}
 	}
 
 }
