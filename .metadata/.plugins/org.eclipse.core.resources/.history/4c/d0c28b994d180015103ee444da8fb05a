@@ -62,18 +62,15 @@ public class Login extends HttpServlet {
 		cache = Cache.getCache();
 		cache.init();
 		
-		config = getServletConfig();
-
-		sc = config.getServletContext();
+//		config = getServletConfig();
+//
+//		sc = config.getServletContext();
 		
 		
 
-		if (sc.getAttribute("cacheUsers") == null) {
-			//sc.setAttribute("cacheUsers", cacheUsers);
-			
-			//това за да не счупя написането до тук :)
-			sc.setAttribute("cacheUsers", cache.getAllUsers());
-		}
+//		if (sc.getAttribute("cacheUsers") == null) {
+//			sc.setAttribute("cacheUsers", cacheUsers);
+//		}
 
 //		cacheUsers = (ArrayList<User>) sc.getAttribute("cacheUsers");
 //		cacheUsers.add(u1);

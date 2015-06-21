@@ -70,8 +70,6 @@ public class Login extends HttpServlet {
 
 		if (sc.getAttribute("cacheUsers") == null) {
 			//sc.setAttribute("cacheUsers", cacheUsers);
-			
-			//това за да не счупя написането до тук :)
 			sc.setAttribute("cacheUsers", cache.getAllUsers());
 		}
 
