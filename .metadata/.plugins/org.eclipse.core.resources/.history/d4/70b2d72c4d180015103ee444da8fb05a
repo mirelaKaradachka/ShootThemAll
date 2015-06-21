@@ -1,20 +1,20 @@
 package cache;
 
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
-import model.User;
-import model.Weapon;
 import controller.SettingsManager;
 import controller.UsersComparator;
+import model.User;
+import model.Weapon;
 
 public class Cache implements ICache {
-	private Vector<User> users;
+	private ArrayList<User> users;
 	private static Cache cache;
 
 	private Cache() {
-		users = new Vector<User>();
+		users = new ArrayList<User>();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class Cache implements ICache {
 	}
 
 	@Override
-	public Vector<User> getAllUsers() {
+	public ArrayList<User> getAllUsers() {
 		return users;
 	}
 

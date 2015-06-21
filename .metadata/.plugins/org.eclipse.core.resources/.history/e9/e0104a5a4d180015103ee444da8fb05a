@@ -1,7 +1,6 @@
 package cache;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import model.User;
 
@@ -16,7 +15,7 @@ public interface ICache {
 	boolean existUser(String username, String password);
 	boolean existUser(String username);
 	boolean existUser(int userId);
-    Vector<User> getAllUsers();
+    ArrayList<User> getAllUsers();
     boolean isEmpty();
     void sort();
     

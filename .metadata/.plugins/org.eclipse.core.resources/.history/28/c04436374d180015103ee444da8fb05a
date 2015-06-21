@@ -73,7 +73,7 @@ public class Cache implements ICache {
 	}
 
 	@Override
-	public Vector<User> getAllUsers() {
+	public ArrayList<User> getAllUsers() {
 		return users;
 	}
 
