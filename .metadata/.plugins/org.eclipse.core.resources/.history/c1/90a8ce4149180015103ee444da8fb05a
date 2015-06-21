@@ -58,9 +58,25 @@ public class Registration extends HttpServlet {
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
 
-			//MD5
-			String cryptPass = SettingsManager.cryptMD5(password);
-			password = cryptPass;
+			// md5 password
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("MD5");
+				md.update(password.getBytes());
+				byte byteData[] = md.digest();
+				// convert the byte to hex format
+				StringBuffer sb = new StringBuffer();
+				for (int i = 0; i < byteData.length; i++) {
+					sb.append(Integer
+							.toString((byteData[i] & 0xff) + 0x100, 16)
+							.substring(1));
+				}
+
+				System.out.println("Digest(in hex format):: " + sb.toString());
+				password = sb.toString();
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
 
 			String email = userObj.get("email").toString();
 
@@ -72,8 +88,7 @@ public class Registration extends HttpServlet {
 				 */
 
 				// проверка в хеша
-				//if (getServletContext().getAttribute("cacheUsers") == null) {
-				if (Cache.getCache().isEmpty()) {
+				if (getServletContext().getAttribute("cacheUsers") == null) {
 
 					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
@@ -99,8 +114,9 @@ public class Registration extends HttpServlet {
 					// използваме кеша -> друг вариант е от базата данни					
 //					ArrayList<User> list = (ArrayList<User>) getServletConfig()
 //							.getServletContext().getAttribute("cacheUsers");
-
-					ArrayList<User> list = Cache.getCache().getAllUsers();
+					Cache users = (Cache) getServletConfig()
+							.getServletContext().getAttribute("cacheUsers");
+					ArrayList<User> list = users.getAllUsers();
 					for (int i = 0; i < list.size(); i++) {
 						if (list.get(i).getUsername().equals(username)) {
 							existUser = true;

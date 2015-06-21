@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -142,11 +140,6 @@ public class UserInfoManager extends HttpServlet {
 				try {
 
 					String password = userObj.get("password").toString();
-					
-					//MD5
-					String cryptPass = SettingsManager.cryptMD5(password);
-					password = cryptPass;
-					
 					// update password:
 
 					// - update in database  --> to do
@@ -206,6 +199,5 @@ public class UserInfoManager extends HttpServlet {
 		System.out.println(result.toJSONString());
 		response.getWriter().write(result.toJSONString());
 	}
-	
-	
+
 }

@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -18,7 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import cache.Cache;
+import java.security.MessageDigest;
 
 /**
  * Servlet implementation class Registration
@@ -30,7 +28,7 @@ public class Registration extends HttpServlet {
 	public Registration() {
 
 	}
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -57,72 +55,61 @@ public class Registration extends HttpServlet {
 			JSONObject userObj = (JSONObject) parser.parse(line);
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
-
-			//MD5
-			String cryptPass = SettingsManager.cryptMD5(password);
-			password = cryptPass;
-
 			String email = userObj.get("email").toString();
 
 			if (!username.isEmpty() && !password.isEmpty() && !email.isEmpty()) {
 
 				/*
-				 * Проверка дали този username e зает Проверкa в базата данни
-				 * или в хеша
+				 * Проверка дали този username e зает 
+				 * Проверкa в базата данни или
+				 * в хеша
 				 */
 
 				// проверка в хеша
-				//if (getServletContext().getAttribute("cacheUsers") == null) {
-				if (Cache.getCache().isEmpty()) {
-
+				if (getServletContext().getAttribute("cacheUsers") == null) {
+					
 					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
-
+					
 					// това идва като резултат от INSERT ... SELECT
 					int userId = 6;
-					User user = new User(userId, username, password, email, 0,
-							0, new Weapon(1, 1, 1), false);
-
-					ArrayList<User> cacheUsers = new ArrayList<User>();
-					cacheUsers.add(user);
-					getServletConfig().getServletContext().setAttribute(
-							"cacheUsers", cacheUsers);
-
+					User user = new User(userId, username, password, email, 0, 0, new Weapon(1, 1, 1), false);
+					
+				    ArrayList<User> cacheUsers = new ArrayList<User>();
+				    cacheUsers.add(user);
+					getServletConfig().getServletContext().setAttribute("cacheUsers", cacheUsers);
+					
 					// добавяме в базата данни за активни оръжия 1вото оръжие
-
+					
 					response.setStatus(200);
 					result.put("userId", userId);
 
 				} else {
 
 					boolean existUser = false;
-					// използваме кеша -> друг вариант е от базата данни					
-//					ArrayList<User> list = (ArrayList<User>) getServletConfig()
-//							.getServletContext().getAttribute("cacheUsers");
-
-					ArrayList<User> list = Cache.getCache().getAllUsers();
+					// използваме кеша -> друг вариант е от базата данни
+					ArrayList<User> list = (ArrayList<User>) getServletConfig()
+							.getServletContext().getAttribute("cacheUsers");
 					for (int i = 0; i < list.size(); i++) {
 						if (list.get(i).getUsername().equals(username)) {
 							existUser = true;
 						}
 					}
-
-					if (existUser) {
+					
+					if(existUser){
 						result.put("error", "Existing username");
 						response.setStatus(400);
-					} else {
-
+					}else{
+						
 						// няма такъв потребител = > insert в базата данни и
 						// добавяне в хеша
-
+						
 						// това идва като резултат от INSERT ... SELECT
 						int userId = 6;
-						User user = new User(userId, username, password, email,
-								0, 0, new Weapon(1, 1, 1), false);
-
-						// добавяме в базата данни за активни оръжия 1вото
-						// оръжие
-
+						User user = new User(userId, username, password, email, 0, 0, new Weapon(1, 1, 1), false);
+						
+						// добавяме в базата данни за активни оръжия 1вото оръжие
+						
 						list.add(user);
 						response.setStatus(200);
 						result.put("userId", userId);

@@ -103,7 +103,6 @@ public class Login extends HttpServlet {
 			String cryptPass = SettingsManager.cryptMD5(password);
 			password = cryptPass;
 
-			//	if (getServletContext().getAttribute("cacheUsers") == null) {
 			if (Cache.getCache().isEmpty()) {
 						
 				result.put("error", "Invalid username or password");

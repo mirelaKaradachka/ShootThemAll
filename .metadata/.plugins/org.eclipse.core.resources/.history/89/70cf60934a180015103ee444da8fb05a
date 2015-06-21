@@ -144,8 +144,7 @@ public class UserInfoManager extends HttpServlet {
 					String password = userObj.get("password").toString();
 					
 					//MD5
-					String cryptPass = SettingsManager.cryptMD5(password);
-					password = cryptPass;
+					password = SettingsManager.cryptMD5(password);
 					
 					// update password:
 

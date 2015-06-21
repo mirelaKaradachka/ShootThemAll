@@ -4,7 +4,6 @@ import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import controller.SettingsManager;
 import controller.UsersComparator;
 import model.User;
 import model.Weapon;
@@ -89,11 +88,11 @@ public class Cache implements ICache {
 		//слагаме 20те с най- скорошна активност
 
 		// тест
-		User u1 = new User(1, "Ivan", SettingsManager.cryptMD5("Ivan"), "Ivan", 20, 1,
+		User u1 = new User(1, "Ivan", "Ivan", "Ivan", 20, 1,
 				new Weapon(1, 1, 0), false);
-		User u2 = new User(2, "Petko", SettingsManager.cryptMD5("Petko"), "Petko", 10, 0, new Weapon(1,
+		User u2 = new User(2, "Petko", "Petko", "Petko", 10, 0, new Weapon(1,
 				1, 0), false);
-		User u3 = new User(3, "Tanq", SettingsManager.cryptMD5("Tanq"), "Tanq", 14, 0,
+		User u3 = new User(3, "Tanq", "Tanq", "Tanq", 14, 0,
 				new Weapon(1, 1, 0), false);
 
 		addUser(u1);

@@ -72,8 +72,7 @@ public class Registration extends HttpServlet {
 				 */
 
 				// проверка в хеша
-				//if (getServletContext().getAttribute("cacheUsers") == null) {
-				if (Cache.getCache().isEmpty()) {
+				if (getServletContext().getAttribute("cacheUsers") == null) {
 
 					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
@@ -99,8 +98,9 @@ public class Registration extends HttpServlet {
 					// използваме кеша -> друг вариант е от базата данни					
 //					ArrayList<User> list = (ArrayList<User>) getServletConfig()
 //							.getServletContext().getAttribute("cacheUsers");
-
-					ArrayList<User> list = Cache.getCache().getAllUsers();
+					Cache users = (Cache) getServletConfig()
+							.getServletContext().getAttribute("cacheUsers");
+					ArrayList<User> list = users.getAllUsers();
 					for (int i = 0; i < list.size(); i++) {
 						if (list.get(i).getUsername().equals(username)) {
 							existUser = true;

@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
@@ -62,15 +60,16 @@ public class Login extends HttpServlet {
 		cache = Cache.getCache();
 		cache.init();
 		
-//		config = getServletConfig();
-//
-//		sc = config.getServletContext();
+		config = getServletConfig();
+
+		sc = config.getServletContext();
 		
 		
 
-//		if (sc.getAttribute("cacheUsers") == null) {
-//			sc.setAttribute("cacheUsers", cacheUsers);
-//		}
+		if (sc.getAttribute("cacheUsers") == null) {
+			//sc.setAttribute("cacheUsers", cacheUsers);
+			sc.setAttribute("cacheUsers", cache);
+		}
 
 //		cacheUsers = (ArrayList<User>) sc.getAttribute("cacheUsers");
 //		cacheUsers.add(u1);
@@ -98,13 +97,8 @@ public class Login extends HttpServlet {
 			JSONObject userObj = (JSONObject) parser.parse(line);
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
-			
-			//MD5
-			String cryptPass = SettingsManager.cryptMD5(password);
-			password = cryptPass;
 
-			//	if (getServletContext().getAttribute("cacheUsers") == null) {
-			if (Cache.getCache().isEmpty()) {
+			if (getServletContext().getAttribute("cacheUsers") == null || Cache.getCache().isEmpty()) {
 						
 				result.put("error", "Invalid username or password");
 				response.setStatus(400);
