@@ -1,4 +1,34 @@
+<<<<<<< HEAD
+create table app.Users
+(
+	id int not null,
+	username varchar(40) not null unique,
+	password varchar(40) not null,
+	email varchar(40) not null,
+	allowNotification integer not null check(allowNotification >= 0 and allowNotification <=1),
+	level smallint not null,
+	score int not null,
+	choosenWeaponId int not null,
+	primary key(id)	
+);
 
+
+
+create table app.Weapons(
+	id int not null,
+	damage int not null,
+	price int not null,
+	primary key(id)
+	
+);
+
+create table app.UnlockedWeapons(	
+	userId int not null,
+	weaponId int not null,
+	primary key(userId, weaponId),
+	foreign key(userId) references app.Users(id),
+	foreign key(weaponId) references app.Weapons(id)
+=======
 create table APP.Users(
 id int not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 username varchar(45) not null unique,
@@ -25,6 +55,7 @@ weapon_id int not null,
 primary key (user_id, weapon_id),
 foreign key (weapon_id) references app.Weapons (id),
 foreign key (user_id) references app.Users (id)
+>>>>>>> a55679e4e28a611853177d3a17fbf5e84a0cb9e2
 );
 
 insert into app.Weapons values(3,3,3); 
