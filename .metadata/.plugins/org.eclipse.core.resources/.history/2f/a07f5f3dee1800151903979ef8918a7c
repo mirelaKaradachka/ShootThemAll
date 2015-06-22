@@ -46,7 +46,7 @@ public class Test extends HttpServlet {
 		System.out.println(sb.toString());
 		
 		Weapon w = wd.getWeapon(1);
-		System.out.println("price : " + w.getPrice());
+		System.out.println("price : "w.getPrice());
 		response.getWriter().write("</html>");
 	}
 

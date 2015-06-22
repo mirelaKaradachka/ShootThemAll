@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,6 +31,14 @@ public class DBWeaponDao implements WeaponDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("1");
+		}finally{
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("2");
+			}
 		}
 		
 
@@ -40,21 +47,8 @@ public class DBWeaponDao implements WeaponDao {
 
 	@Override
 	public Weapon getWeapon(int weaponId) {
-		PreparedStatement statement;
-		Weapon weapon = null;
-		try {
-			statement = connect.prepareStatement("SELECT DAMAGE, PRICE FROM APP.WEAPONS WHERE ID = ?");
-			statement.setInt(1, weaponId);
-			ResultSet rs = statement.executeQuery();
-			rs.next();
-			weapon = new Weapon(weaponId, rs.getInt("damage"), rs.getInt("price"));
-			System.out.println(weapon.getPrice());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return weapon;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

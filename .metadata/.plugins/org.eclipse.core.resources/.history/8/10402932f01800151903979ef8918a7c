@@ -21,7 +21,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import cache.Cache;
-import db.DBManager;
 
 /**
  * Servlet implementation class Login
@@ -88,11 +87,6 @@ public class Login extends HttpServlet {
 //		cacheUsers.add(u3);
 //		cacheUsers.sort(new UsersComparator());
 		// sc.setAttribute("cacheUsers", cacheUsers);
-	}
-	
-	@Override
-	public void destroy() {
-		DBManager.getDBManager().destroyConnection();
 	}
 
 	protected void doPost(HttpServletRequest request,

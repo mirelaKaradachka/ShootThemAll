@@ -32,6 +32,14 @@ public class DBWeaponDao implements WeaponDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("1");
+		}finally{
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("2");
+			}
 		}
 		
 
@@ -44,11 +52,10 @@ public class DBWeaponDao implements WeaponDao {
 		Weapon weapon = null;
 		try {
 			statement = connect.prepareStatement("SELECT DAMAGE, PRICE FROM APP.WEAPONS WHERE ID = ?");
-			statement.setInt(1, weaponId);
+			statement.setInt(0, weaponId);
 			ResultSet rs = statement.executeQuery();
 			rs.next();
 			weapon = new Weapon(weaponId, rs.getInt("damage"), rs.getInt("price"));
-			System.out.println(weapon.getPrice());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

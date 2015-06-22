@@ -32,6 +32,14 @@ public class DBWeaponDao implements WeaponDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("1");
+		}finally{
+//			try {
+//				connect.close();
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				System.out.println("2");
+//			}
 		}
 		
 

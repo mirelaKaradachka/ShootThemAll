@@ -55,13 +55,7 @@ public class DBManager {
 	}
 	
 	public void destroyConnection(){
-		try {
-			c.close();
-		} catch (SQLException e) {
-			
-			System.out.println("error in destroy connection");
-			e.printStackTrace();
-		}
+		c.close();
 	}
 
 	public static DBManager getDBManager() {

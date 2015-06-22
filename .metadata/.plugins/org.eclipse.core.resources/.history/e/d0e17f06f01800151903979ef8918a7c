@@ -53,16 +53,6 @@ public class DBManager {
 		}
 		return c;
 	}
-	
-	public void destroyConnection(){
-		try {
-			c.close();
-		} catch (SQLException e) {
-			
-			System.out.println("error in destroy connection");
-			e.printStackTrace();
-		}
-	}
 
 	public static DBManager getDBManager() {
 		if (dbinstances == null) {

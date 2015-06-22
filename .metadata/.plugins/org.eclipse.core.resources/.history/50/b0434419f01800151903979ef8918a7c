@@ -58,9 +58,9 @@ public class DBManager {
 		try {
 			c.close();
 		} catch (SQLException e) {
-			
-			System.out.println("error in destroy connection");
+			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("error in destroy connection");
 		}
 	}
 
