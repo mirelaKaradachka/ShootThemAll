@@ -44,7 +44,7 @@ public class DBUserDao implements UserDao{
 	}
 
 	@Override
-	public void updateUser(String type, String value, int userId) {
+	public void updateUser(String type, int userId) {
 		// TODO Auto-generated method stub
 		
 	}
