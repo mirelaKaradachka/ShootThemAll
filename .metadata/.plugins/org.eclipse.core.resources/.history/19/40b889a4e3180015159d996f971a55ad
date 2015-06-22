@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Connection;
@@ -19,24 +18,10 @@ public class DBWeaponDao implements WeaponDao {
 		Statement statement;
 		try {
 			statement = connect.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT ID, DAMAGE, PRICE FROM WEAPONS");
-			while(resultSet.next()){
-				int id = resultSet.getInt("id");
-				int damage = resultSet.getInt("damage");
-				int price = resultSet.getInt("price");
-				Weapon weapon = new Weapon(id, damage, price);
-				list.add(weapon);
-			}
+			statement.execute("SELECT ID DAMAGE PRICE FROM WEAPONS");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		
 

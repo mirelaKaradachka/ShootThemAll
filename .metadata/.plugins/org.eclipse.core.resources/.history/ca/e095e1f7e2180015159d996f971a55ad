@@ -1,13 +1,15 @@
 package model.dao;
 
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
-import model.Weapon;
 import db.DBManager;
+import model.Weapon;
 
 public class DBWeaponDao implements WeaponDao {
 	private Connection connect = DBManager.getDBManager().getConnection();
@@ -15,30 +17,14 @@ public class DBWeaponDao implements WeaponDao {
 	@Override
 	public ArrayList<Weapon> getWeapons() {
 		ArrayList<Weapon> list = null;
-
 		Statement statement;
 		try {
 			statement = connect.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT ID, DAMAGE, PRICE FROM WEAPONS");
-			while(resultSet.next()){
-				int id = resultSet.getInt("id");
-				int damage = resultSet.getInt("damage");
-				int price = resultSet.getInt("price");
-				Weapon weapon = new Weapon(id, damage, price);
-				list.add(weapon);
-			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
-		
+		ResultSet resultSet = statement.executeQuery();
 
 		return list;
 	}

@@ -19,7 +19,7 @@ public class DBWeaponDao implements WeaponDao {
 		Statement statement;
 		try {
 			statement = connect.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT ID, DAMAGE, PRICE FROM WEAPONS");
+			ResultSet resultSet = statement.executeQuery("SELECT ID DAMAGE PRICE FROM WEAPONS");
 			while(resultSet.next()){
 				int id = resultSet.getInt("id");
 				int damage = resultSet.getInt("damage");

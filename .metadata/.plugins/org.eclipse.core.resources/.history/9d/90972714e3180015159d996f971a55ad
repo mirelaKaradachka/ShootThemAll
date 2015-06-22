@@ -1,0 +1,29 @@
+package model.dao;
+
+import java.sql.Statement;
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import model.Weapon;
+import db.DBManager;
+
+public class DBWeaponDao implements WeaponDao {
+	private Connection connect = DBManager.getDBManager().getConnection();
+
+	@Override
+	public ArrayList<Weapon> getWeapons() {
+		ArrayList<Weapon> list = null;
+
+		Statement statement = connect.createStatement();
+		statement.execute("Select * from weapons");
+
+		return list;
+	}
+
+	@Override
+	public Weapon getWeapon(int weaponId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

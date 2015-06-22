@@ -32,12 +32,10 @@ public class Test extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.getWriter().write("<html><head></head>");
 		response.getWriter().write("<h1>Hello World</h1>");
 		
 		WeaponDao wd = new DBWeaponDao();
-		
 		ArrayList<Weapon> list = (ArrayList<Weapon>) wd.getWeapons();
 		System.out.println(list.toString());
 		response.getWriter().write("</html>");

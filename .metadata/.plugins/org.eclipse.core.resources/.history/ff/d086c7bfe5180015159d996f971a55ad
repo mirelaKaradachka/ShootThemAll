@@ -22,7 +22,7 @@ public class DBManager {
 		// connect
 
 		try {
-			Class.forName("org.apache.derby.jdbc.ClientDriver");
+			Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();;
 			c = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
 		} catch (ClassNotFoundException e) {
@@ -32,6 +32,12 @@ public class DBManager {
 		} catch (SQLException ex) {
 			// TODO: handle exception
 			ex.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
