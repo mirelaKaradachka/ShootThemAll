@@ -39,7 +39,11 @@ public class Test extends HttpServlet {
 		WeaponDao wd = new DBWeaponDao();
 		
 		ArrayList<Weapon> list = (ArrayList<Weapon>) wd.getWeapons();
-		System.out.println(list.toString());
+		StringBuffer sb = new StringBuffer();
+		for(int i =  0 ; i < list.size(); i++){
+			sb.append(list.get(i).getType() + " ");
+		}
+		System.out.println(sb.toString());
 		response.getWriter().write("</html>");
 	}
 

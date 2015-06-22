@@ -41,7 +41,7 @@ public class DBWeaponDao implements WeaponDao {
 			}
 		}
 		
-
+		System.out.println(list.toString());
 		return list;
 	}
 

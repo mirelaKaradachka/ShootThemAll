@@ -14,12 +14,12 @@ public class DBWeaponDao implements WeaponDao {
 
 	@Override
 	public ArrayList<Weapon> getWeapons() {
-		ArrayList<Weapon> list = new ArrayList<Weapon>();
+		ArrayList<Weapon> list = null;
 
 		Statement statement;
 		try {
 			statement = connect.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT ID, DAMAGE, PRICE FROM APP.WEAPONS");
+			ResultSet resultSet = statement.executeQuery("SELECT ID, DAMAGE, PRICE FROM WEAPONS");
 			while(resultSet.next()){
 				int id = resultSet.getInt("id");
 				int damage = resultSet.getInt("damage");
@@ -30,14 +30,12 @@ public class DBWeaponDao implements WeaponDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("1");
 		}finally{
 			try {
 				connect.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				System.out.println("2");
 			}
 		}
 		

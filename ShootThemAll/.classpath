@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="/Users/jgeorgiev/Desktop/eclipse/plugins/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="/Users/jgeorgiev/Desktop/eclipse/plugins/javax.servlet_3.0.0.v201112011016.jar"/>
 	<classpathentry kind="lib" path="/Users/jgeorgiev/Desktop/eclipse/plugins/javax.mail.jar"/>
+	<classpathentry kind="lib" path="db/DB/derby.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

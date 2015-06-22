@@ -14,7 +14,7 @@ public class DBWeaponDao implements WeaponDao {
 
 	@Override
 	public ArrayList<Weapon> getWeapons() {
-		ArrayList<Weapon> list = new ArrayList<Weapon>();
+		ArrayList<Weapon> list = null;
 
 		Statement statement;
 		try {
@@ -24,6 +24,7 @@ public class DBWeaponDao implements WeaponDao {
 				int id = resultSet.getInt("id");
 				int damage = resultSet.getInt("damage");
 				int price = resultSet.getInt("price");
+				System.out.println(id + " " + damage + " " + price );
 				Weapon weapon = new Weapon(id, damage, price);
 				list.add(weapon);
 			}
@@ -41,7 +42,7 @@ public class DBWeaponDao implements WeaponDao {
 			}
 		}
 		
-
+		System.out.println(list.toString());
 		return list;
 	}
 
