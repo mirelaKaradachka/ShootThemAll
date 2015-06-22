@@ -19,11 +19,18 @@
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 <fullyQualifiedTypeName name="cache.ICache"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="controller.UsersComparator"/>
-<fullyQualifiedTypeName name="cache.Cache"/>
 <fullyQualifiedTypeName name="java.security.acl.LastOwnerException"/>
 <fullyQualifiedTypeName name="model.User"/>
 <fullyQualifiedTypeName name="model.Weapon"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="javax.mail.internet.MimeBodyPart"/>
+<fullyQualifiedTypeName name="javax.mail.internet.MimeMultipart"/>
+<fullyQualifiedTypeName name="javax.mail.BodyPart"/>
+<fullyQualifiedTypeName name="javax.mail.PasswordAuthentication"/>
+<fullyQualifiedTypeName name="cache.Cache"/>
+<fullyQualifiedTypeName name="java.lang.SecurityManager"/>
+<fullyQualifiedTypeName name="controller.SettingsManager"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

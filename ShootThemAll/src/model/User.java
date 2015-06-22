@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class User {
-	private final int id;
+	private int id;
 	private final String username;
 	private String password;
 	private String email;
@@ -13,6 +13,20 @@ public class User {
 	private boolean allowNotification;
 	private Date date;
 		
+	public User(String username, String password) {
+		this.username = username;
+		setPassword(password);
+
+	}
+	
+	public User(String username, String password, String email) {
+		this(username, password);
+		setEmail(email);
+		
+	}
+	
+
+ //testing	
 	public User(int id, String username, String password, String email,
 			int score, int level, Weapon weapon, boolean allowNotification) {
 		this.id = id;
@@ -23,20 +37,8 @@ public class User {
 		setLevel(level);
 		setWeapon(weapon);
 		setAllowNotification(allowNotification);
-		date = new Date();
-	}
-	
-	public User(int id, String username, String password, String email,
-			int score, int level, Weapon weapon, boolean allowNotification, Date date) {
-		this.id = id;
-		this.username = username;
-		setPassword(password);
-		setEmail(email);
-		setScore(score);
-		setLevel(level);
-		setWeapon(weapon);
-		setAllowNotification(allowNotification);
-		setDate(date);
+		setDate(new Date());
+
 	}
 
 

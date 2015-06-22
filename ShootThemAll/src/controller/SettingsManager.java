@@ -14,9 +14,9 @@ public class SettingsManager {
 	public static int getMaxLevel() {
 		if (ls == null) {
 			return new SettingsManager().maxLevel;
-		} else {
-			return ls.maxLevel;
 		}
+		return ls.maxLevel;
+
 	}
 
 	// MD5
