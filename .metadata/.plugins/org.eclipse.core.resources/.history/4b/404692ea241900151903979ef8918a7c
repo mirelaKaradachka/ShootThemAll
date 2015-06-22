@@ -27,10 +27,9 @@ foreign key (weapon_id) references app.Weapons (id),
 foreign key (user_id) references app.Users (id)
 );
 
-
-insert into app.Weapons values(1,1); 
-insert damage, price into app.Weapons damage, price values(2,3); 
-insert damage, price into app.Weapons values(3,3); 
+insert into app.Weapons values(3,3,3); 
+insert into app.Weapons values(2,2,2); 
+insert into app.Weapons values(1,1,1); 
 insert into app.Users values(2,'2','1','1',1,1,1,1);
 insert into app.UnlockedWeapons values(1,1);
 
