@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.User;
 import model.Weapon;
+import model.dao.DBUserDao;
+import model.dao.UserDao;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -35,7 +37,7 @@ public class Registration extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// test
 		doPost(req, resp);
 	}
 
@@ -59,7 +61,7 @@ public class Registration extends HttpServlet {
 			String username = userObj.get("username").toString();
 			String password = userObj.get("password").toString();
 
-			//MD5
+			// MD5
 			String cryptPass = SettingsManager.cryptMD5(password);
 			password = cryptPass;
 
@@ -72,63 +74,99 @@ public class Registration extends HttpServlet {
 				 * или в хеша
 				 */
 
+				User user = new User(username, password, email);
+				UserDao ud = new DBUserDao();
+
 				// проверка в хеша
-				//if (getServletContext().getAttribute("cacheUsers") == null) {
-				if (Cache.getCache().isEmpty()) {
+				// if (getServletContext().getAttribute("cacheUsers") == null) {
+				// if (Cache.getCache().isEmpty()) {
+
+				// prowerqvame dali ima zapisi v bazata danni
+				boolean emptyDB = false;
+				if (emptyDB) {
 
 					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
 
 					// това идва като резултат от INSERT ... SELECT
-					int userId = 6;
-					User user = new User(userId, username, password, email, 0,
-							0, new Weapon(1, 1, 1), false);
 
-					ArrayList<User> cacheUsers = new ArrayList<User>();
-					cacheUsers.add(user);
-					getServletConfig().getServletContext().setAttribute(
-							"cacheUsers", cacheUsers);
+					
+					int userId = ud.addUser(user);
+
+					// ArrayList<User> cacheUsers = new ArrayList<User>();
+					// cacheUsers.add(user);
+					// getServletConfig().getServletContext().setAttribute(
+					// "cacheUsers", cacheUsers);
 
 					// добавяме в базата данни за активни оръжия 1вото оръжие
-
-					response.setStatus(200);
-					result.put("userId", userId);
-
-				} else {
-
-					boolean existUser = false;
-					// използваме кеша -> друг вариант е от базата данни					
-//					ArrayList<User> list = (ArrayList<User>) getServletConfig()
-//							.getServletContext().getAttribute("cacheUsers");
-
-					Vector<User> list = Cache.getCache().getAllUsers();
-					for (int i = 0; i < list.size(); i++) {
-						if (list.get(i).getUsername().equals(username)) {
-							existUser = true;
-						}
-					}
-
-					if (existUser) {
-						result.put("error", "Existing username");
-						response.setStatus(400);
-					} else {
-
-						// няма такъв потребител = > insert в базата данни и
-						// добавяне в хеша
-
-						// това идва като резултат от INSERT ... SELECT
-						int userId = 6;
-						User user = new User(userId, username, password, email,
-								0, 0, new Weapon(1, 1, 1), false);
-
-						// добавяме в базата данни за активни оръжия 1вото
-						// оръжие
-
-						list.add(user);
+					if (userId > 0) {
 						response.setStatus(200);
 						result.put("userId", userId);
+					} else {
+						result.put("error", "DataBase error ");
+						response.setStatus(400);
+
 					}
 
+				} else{
+					User existUser = ud.getUser(user.getUsername());
+					System.out.println(existUser.getUsername());
+					if(existUser != null){
+						
+						result.put("error", "Existing username");
+					    response.setStatus(400);
+					    
+					}else{
+						int userId = ud.addUser(user);
+						
+						if (userId > 0) {
+							response.setStatus(200);
+							result.put("userId", userId);
+						} else {
+							result.put("error", "DataBase error ");
+							response.setStatus(400);
+
+						}
+						
+					}
+					
+					
+					
+					
+					// boolean existUser = false;
+					// // използваме кеша -> друг вариант е от базата данни
+					// // ArrayList<User> list = (ArrayList<User>)
+					// getServletConfig()
+					// // .getServletContext().getAttribute("cacheUsers");
+					//
+					// Vector<User> list = Cache.getCache().getAllUsers();
+					// for (int i = 0; i < list.size(); i++) {
+					// if (list.get(i).getUsername().equals(username)) {
+					// existUser = true;
+					// }
+					// }
+					//
+					// if (existUser) {
+					// result.put("error", "Existing username");
+					// response.setStatus(400);
+					// } else {
+					//
+					// // няма такъв потребител = > insert в базата данни и
+					// // добавяне в хеша
+					//
+					// // това идва като резултат от INSERT ... SELECT
+					// int userId = 6;
+					// User user = new User(userId, username, password, email,
+					// 0, 0, new Weapon(1, 1, 1), false);
+					//
+					// // добавяме в базата данни за активни оръжия 1вото
+					// // оръжие
+					//
+					// list.add(user);
+					// response.setStatus(200);
+					// result.put("userId", userId);
+					// }
+					//
 				}
 
 			} else {
@@ -147,5 +185,4 @@ public class Registration extends HttpServlet {
 		System.out.println(result.toJSONString());
 		response.getWriter().write(result.toJSONString());
 	}
-
 }

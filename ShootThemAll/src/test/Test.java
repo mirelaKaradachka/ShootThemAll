@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
 import model.Weapon;
+import model.dao.DBUserDao;
 import model.dao.DBWeaponDao;
+import model.dao.UserDao;
 import model.dao.WeaponDao;
 
 /**
@@ -47,6 +50,15 @@ public class Test extends HttpServlet {
 		
 		Weapon w = wd.getWeapon(1);
 		System.out.println("price : " + w.getPrice());
+//		
+//		User a = new User("Petkan", "121", "aa@aaa.aa");
+		UserDao ud = new DBUserDao();
+//		ud.addUser(a);
+		
+		System.out.println();
+		User u1 = ud.getUser("Petq");
+		System.out.println(u1.getUsername());
+		
 		response.getWriter().write("</html>");
 	}
 

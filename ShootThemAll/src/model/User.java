@@ -38,6 +38,17 @@ public class User {
 
 	}
 
+	public User(int id, String username, String password, String email,
+			int score, int level, Weapon weapon, boolean allowNotification, Date date) {
+		this(username, password, email);
+		setScore(score);
+		setLevel(level);
+		setWeapon(weapon);
+		setAllowNotification(allowNotification);
+		setDate(date);
+
+	}
+
 
 	//get
 	public int getId() {

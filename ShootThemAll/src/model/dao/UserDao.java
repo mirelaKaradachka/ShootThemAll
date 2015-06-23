@@ -13,8 +13,7 @@ public interface UserDao {
 	List getAllUsers();
 	User getUser(int userId);
 	User getUser(String username);
-	void addUser(User u);
-	void deleteUser(User u);
+	int addUser(User u);
 	void deletUser(int userId);
 	void updateUser(String type, String value, int userId);
 	boolean existUser(String username, String password);
