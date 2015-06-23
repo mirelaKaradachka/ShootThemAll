@@ -58,7 +58,6 @@ public class Test extends HttpServlet {
 		System.out.println();
 		User u1 = ud.getUser("Petq");
 		System.out.println(u1.getUsername());
-		System.out.println(ud.hasQuery());
 		
 		response.getWriter().write("</html>");
 	}

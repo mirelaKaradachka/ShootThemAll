@@ -10,7 +10,6 @@ public interface UserDao {
 	
 	String DATASOURCE_DB = "DATASOURCE_DB";
 	
-	boolean hasQuery();
 	List getAllUsers();
 	User getUser(int userId);
 	User getUser(String username);

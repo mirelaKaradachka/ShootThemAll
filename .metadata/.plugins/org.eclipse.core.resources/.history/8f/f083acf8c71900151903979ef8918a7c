@@ -351,7 +351,7 @@ public class DBUserDao implements UserDao {
 
 		    st = connection.createStatement();
 			ResultSet results = st
-					.executeQuery("select count(*) from app.users");
+					.executeQuery("select count(*) from app.users;");
 			results.next();
 			count = results.getInt(1);
 		}catch(SQLException e){
@@ -361,7 +361,7 @@ public class DBUserDao implements UserDao {
 		if(count > 0){
 			result = true;
 		}
-		System.out.println("num rows in user : " + count );
+		
 		return result;
 		
 	}

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Jun 23 19:33:45 EEST 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014e-2144-a9b5-0000030925a0 
+Tue Jun 23 19:52:25 EEST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014e-2155-c002-0000031fa730 
 on database directory /Users/jgeorgiev/MyDB with class loader WebAppClassLoader=ShootThemAll@6d21714c 
 Loaded from file:/Users/jgeorgiev/Desktop/ShootThemAll/ShootThemAll/db/DB/derby.jar
 java.vendor=Oracle Corporation

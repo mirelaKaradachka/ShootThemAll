@@ -17,12 +17,11 @@ import db.DBManager;
 
 public class DBUserDao implements UserDao {
 	private Connection connection = DBManager.getDBManager().getConnection();
-	//private Statement st;
+	private Statement st;
 
 	@Override
 	public List getAllUsers() {
 		ArrayList<User> users = new ArrayList<User>();
-		Statement st;
 		try {
 			connection.setAutoCommit(false);
 			st = connection.createStatement();
@@ -342,27 +341,4 @@ public class DBUserDao implements UserDao {
 		return score;
 	}
 
-	
-	public boolean hasQuery(){
-		boolean result = false;
-		int count = 0;
-		Statement st;
-		try {
-
-		    st = connection.createStatement();
-			ResultSet results = st
-					.executeQuery("select count(*) from app.users");
-			results.next();
-			count = results.getInt(1);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		
-		if(count > 0){
-			result = true;
-		}
-		System.out.println("num rows in user : " + count );
-		return result;
-		
-	}
 }

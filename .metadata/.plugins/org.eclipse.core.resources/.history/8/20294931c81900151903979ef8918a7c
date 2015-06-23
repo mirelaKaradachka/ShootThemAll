@@ -361,7 +361,7 @@ public class DBUserDao implements UserDao {
 		if(count > 0){
 			result = true;
 		}
-		System.out.println("num rows in user : " + count );
+		
 		return result;
 		
 	}
