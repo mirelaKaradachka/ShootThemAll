@@ -122,7 +122,6 @@ public class DBUserDao implements UserDao {
 					.prepareStatement("select id, password, email, notificationAllow, levelNo, score, choosen_weapon_id,last_activity_on from app.users where username = ?");
 			pst.setString(1, username);
 			ResultSet results = pst.executeQuery();
-			results.next();
 			int id = results.getInt("id");
 			String password = results.getString("password");
 			String email = results.getString("email");

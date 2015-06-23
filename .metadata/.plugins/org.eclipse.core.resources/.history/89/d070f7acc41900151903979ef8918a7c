@@ -122,7 +122,6 @@ public class DBUserDao implements UserDao {
 					.prepareStatement("select id, password, email, notificationAllow, levelNo, score, choosen_weapon_id,last_activity_on from app.users where username = ?");
 			pst.setString(1, username);
 			ResultSet results = pst.executeQuery();
-			results.next();
 			int id = results.getInt("id");
 			String password = results.getString("password");
 			String email = results.getString("email");
@@ -142,7 +141,7 @@ public class DBUserDao implements UserDao {
 			int damage = rs.getInt("damage");
 			int price = rs.getInt("price");
 			connection.commit();
-			user = new User(id, username, password, email, score, levelNo,
+			user = new User(12, username, password, email, score, levelNo,
 					new Weapon(weapon_id,damage, price), notificationAllow);
 
 		} catch (SQLException e) {
