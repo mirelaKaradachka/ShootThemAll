@@ -241,23 +241,104 @@ public class DBUserDao implements UserDao {
 
 	// ...To be continued
 	// Change password update
+	@Override
 	public void updatePassword(String password, int userId) {
-
+		PreparedStatement pst;
+		try {
+			pst = connection
+					.prepareStatement("update app.users set password = ? where id =?");
+		pst.setString(1, password);
+		pst.setInt(2,userId);
+		pst.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Error with updating password!");
+			e.printStackTrace();
+		}
+		
 	}
 
 	// update e-mail
+	//update app.users set email = 'email.bg' where id =1;
+	@Override
 	public void updateEmail(String email, int userId) {
-
+		PreparedStatement pst;
+		try {
+			pst = connection
+					.prepareStatement("update app.users set email = ? where id =?");
+		pst.setString(1, email);
+		pst.setInt(2,userId);
+		pst.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Error with updating email!");
+			e.printStackTrace();
+		}
 	}
 
 	// Update score
+	//add score to curret
+	@Override
 	public void updateScore(int score, int userId) {
-
+		PreparedStatement pst;
+		try {
+			pst = connection
+					.prepareStatement("update app.users set score = score + ? where id =?");
+		pst.setInt(1, score);
+		pst.setInt(2,userId);
+		pst.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Error with updating score!");
+			e.printStackTrace();
+		}
 	}
+	// Update level input levelNo
+	//za preskachane na opredelno nivo - ne poredni
+		@Override
+		public void updateLevel(int level, int userId) {
+			PreparedStatement pst;
+			try {
+				pst = connection
+						.prepareStatement("update app.users set levelNo =  ? where id =?");
+			pst.setInt(1, level);
+			pst.setInt(2, userId);
+			pst.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("Error with updating level!");
+				e.printStackTrace();
+			}
+		}
+		
+		//update level - levelUp
+		@Override
+		public void updateLevelUp( int userId) {
+			PreparedStatement pst;
+			try {
+				pst = connection
+						.prepareStatement("update app.users set levelNo = levelNo +1 where id =?");
+			pst.setInt(1, userId);
+			pst.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("Error with updating level!");
+				e.printStackTrace();
+			}
+		}
 
 	// Update notification
+	@Override
 	public void updateNotification(boolean noficationAllow, int userId) {
-
+		PreparedStatement pst;
+		int notificationINT =0;
+		try {
+			pst = connection
+					.prepareStatement("update app.users set notificationAllow = ? where id =?");
+			if(noficationAllow == true)
+				notificationINT = 1;
+		pst.setInt(1, notificationINT);
+		pst.setInt(2,userId);
+		pst.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Error with updating notification!");
+			e.printStackTrace();
+		}
 	}
 
 	// update user e razdelen na otdelni update
@@ -339,7 +420,7 @@ public class DBUserDao implements UserDao {
 			results.next();
 			score = results.getInt("score");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error in getUserScore");
 			e.printStackTrace();
 		}
 		return score;
@@ -402,7 +483,6 @@ public class DBUserDao implements UserDao {
 				weapon.add(weaponId);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
