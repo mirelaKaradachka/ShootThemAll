@@ -40,12 +40,10 @@ public class DBUserDao implements UserDao {
 				int score = results.getInt("score");
 				int weapon_id = results.getInt("choosen_weapon_id");
 				Date date = results.getDate("last_activity_on");
-
-				// Getting weapon atributes
-				// trqbva da se promeni kato izpolzva getWeapon(int id) ot
-				// BDWeaponDao
-				PreparedStatement pst = connection
-						.prepareStatement("select damage, price from app.weapons where id = ?");
+ 
+				//Getting weapon atributes
+				//trqbva da se promeni kato izpolzva getWeapon(int id) ot BDWeaponDao
+				PreparedStatement pst = connection.prepareStatement("select damage, price from app.weapons where id = ?");
 				pst.setInt(1, weapon_id);
 				ResultSet rs = pst.executeQuery();
 				rs.next();
@@ -53,11 +51,10 @@ public class DBUserDao implements UserDao {
 				int price = rs.getInt("price");
 				connection.commit();
 				User user = new User(id, username, password, email, score,
-						levelNo, new Weapon(weapon_id, damage, price),
-						notificationAllow);
+						levelNo, new Weapon(weapon_id,damage, price), notificationAllow);
 				users.add(user);
-
-			}
+				
+			}	
 		} catch (SQLException e) {
 			try {
 				connection.rollback();
@@ -70,6 +67,7 @@ public class DBUserDao implements UserDao {
 		}
 		return users;
 	}
+	
 
 	@Override
 	public User getUser(int userId) {
@@ -91,9 +89,8 @@ public class DBUserDao implements UserDao {
 			int weapon_id = results.getInt("choosen_weapon_id");
 			Date date = results.getDate("last_activity_on");
 
-			// Getting weapon atributes
-			PreparedStatement pstW = connection
-					.prepareStatement("select damage, price from app.weapons where id = ?");
+			//Getting weapon atributes
+			PreparedStatement pstW = connection.prepareStatement("select damage, price from app.weapons where id = ?");
 			pstW.setInt(1, weapon_id);
 			ResultSet rs = pstW.executeQuery();
 			rs.next();
@@ -101,8 +98,8 @@ public class DBUserDao implements UserDao {
 			int price = rs.getInt("price");
 			connection.commit();
 			user = new User(userId, username, password, email, score, levelNo,
-					new Weapon(weapon_id, damage, price), notificationAllow);
-
+					new Weapon(weapon_id,damage, price), notificationAllow);
+			
 		} catch (SQLException e) {
 			try {
 				connection.rollback();
@@ -125,31 +122,28 @@ public class DBUserDao implements UserDao {
 					.prepareStatement("select id, password, email, notificationAllow, levelNo, score, choosen_weapon_id,last_activity_on from app.users where username = ?");
 			pst.setString(1, username);
 			ResultSet results = pst.executeQuery();
-			if (results != null) {
-				results.next();
-				int id = results.getInt("id");
-				String password = results.getString("password");
-				String email = results.getString("email");
-				boolean notificationAllow = results.getInt("notificationAllow") == 0 ? false
-						: true;
-				int levelNo = results.getInt("levelNo");
-				int score = results.getInt("score");
-				int weapon_id = results.getInt("choosen_weapon_id");
-				Date date = results.getDate("last_activity_on");
+			results.next();
+			int id = results.getInt("id");
+			String password = results.getString("password");
+			String email = results.getString("email");
+			boolean notificationAllow = results.getInt("notificationAllow") == 0 ? false
+					: true;
+			int levelNo = results.getInt("levelNo");
+			int score = results.getInt("score");
+			int weapon_id = results.getInt("choosen_weapon_id");
+			Date date = results.getDate("last_activity_on");
 
-				// Weapon currentWeapon = getWeapon(weapon_id);
-				// Getting weapon atributes
-				PreparedStatement pstW = connection
-						.prepareStatement("select damage, price from app.weapons where id = ?");
-				pstW.setInt(1, weapon_id);
-				ResultSet rs = pstW.executeQuery();
-				rs.next();
-				int damage = rs.getInt("damage");
-				int price = rs.getInt("price");
-				connection.commit();
-				user = new User(id, username, password, email, score, levelNo,
-						new Weapon(weapon_id, damage, price), notificationAllow);
-			}
+			//Weapon currentWeapon = getWeapon(weapon_id);
+			//Getting weapon atributes
+			PreparedStatement pstW = connection.prepareStatement("select damage, price from app.weapons where id = ?");
+			pstW.setInt(1, weapon_id);
+			ResultSet rs = pstW.executeQuery();
+			rs.next();
+			int damage = rs.getInt("damage");
+			int price = rs.getInt("price");
+			connection.commit();
+			user = new User(id, username, password, email, score, levelNo,
+					new Weapon(weapon_id,damage, price), notificationAllow);
 
 		} catch (SQLException e) {
 			try {
@@ -161,37 +155,35 @@ public class DBUserDao implements UserDao {
 			System.out.println("error in select user by name");
 			e.printStackTrace();
 		}
-		// System.out.println(user);
+		//System.out.println(user);
 		return user;
 	}
 
 	@Override
 	public int addUser(User u) {
 		int userId = -1;
-		// default notificationAllow, levelNo, weapon_id
+		//default notificationAllow, levelNo, weapon_id
 		String insertInUser = "insert into app.users (username, password, email) "
 				+ " values (?,?,?) ";
 		String insertInUnlockWeapon = "insert into app.unlockedWeapons (user_id, weapon_id) values(?, ?)";
 		try {
 			connection.setAutoCommit(false);
-			PreparedStatement pst = connection.prepareStatement(insertInUser,
-					PreparedStatement.RETURN_GENERATED_KEYS);
+			PreparedStatement pst = connection.prepareStatement(insertInUser, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setString(1, u.getUsername());
 			pst.setString(2, u.getPassword());
 			pst.setString(3, u.getEmail());
-			// set current date time
-			// Date date = new Date ();
-			// pst.setDate(4, (java.sql.Date) date);
+			//set current date time
+			//Date date = new Date ();
+			//pst.setDate(4, (java.sql.Date) date);
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
 			if (rs != null && rs.next()) {
 				userId = rs.getInt(1);
 			}
-
-			PreparedStatement pst2 = connection
-					.prepareStatement(insertInUnlockWeapon);
-			// gettin user id
-			// gettin weapon id
+			
+			PreparedStatement pst2 = connection.prepareStatement(insertInUnlockWeapon);
+			//gettin user id
+			//gettin weapon id
 			pst2.setInt(1, userId);
 			pst2.setInt(2, 1);
 			pst2.executeUpdate();
@@ -207,8 +199,12 @@ public class DBUserDao implements UserDao {
 			e.printStackTrace();
 		}
 		return userId;
+		
 
 	}
+
+	
+
 
 	@Override
 	public void deletUser(int userId) {
@@ -216,17 +212,17 @@ public class DBUserDao implements UserDao {
 		PreparedStatement pst;
 		PreparedStatement pst1;
 		try {
-			// transackiq - trie ot user i ot
+			//transackiq - trie ot user i ot 
 			connection.setAutoCommit(false);
 			pst = connection
 					.prepareStatement("delete from app.users where id = ?");
-			pst.setInt(1, userId);
-			pst.executeUpdate();
-
-			pst1 = connection
-					.prepareStatement("delete from app.unlockedWeapons where user_id = ?");
-			pst.setInt(1, userId);
-			connection.commit();
+		pst.setInt(1, userId);
+		pst.executeUpdate();
+		
+		pst1 = connection
+				.prepareStatement("delete from app.unlockedWeapons where user_id = ?");
+		pst.setInt(1, userId);
+		connection.commit();
 		} catch (SQLException e) {
 			try {
 				connection.rollback();
@@ -237,30 +233,27 @@ public class DBUserDao implements UserDao {
 			e.printStackTrace();
 			System.out.println("Error deleting user");
 		}
+		
 
 	}
 
-	// ...To be continued
-	// Change password update
-	public void updatePassword(String password, int userId) {
+	//...To be continued
+	//Change password update 
+	public void updatePassword(String password,  int userId) {
 
 	}
-
-	// update e-mail
-	public void updateEmail(String email, int userId) {
-
-	}
-
-	// Update score
-	public void updateScore(int score, int userId) {
+	//update e-mail
+	public void updateEmail(String email,  int userId) {
 
 	}
-
-	// Update notification
-	public void updateNotification(boolean noficationAllow, int userId) {
+	//Update score
+	public void updateScore(int score,  int userId) {
 
 	}
+	//Update notification 
+	public void updateNotification(boolean noficationAllow,  int userId) {
 
+	}
 	// update user e razdelen na otdelni update
 	@Override
 	public void updateUser(String type, String value, int userId) {
@@ -271,9 +264,10 @@ public class DBUserDao implements UserDao {
 	public boolean existUser(String username, String password) {
 		boolean flag = false;
 		try {
-
+			
 			String selecQuery = "select username , password from app.users where username = ? and password = ?";
-			PreparedStatement pst = connection.prepareStatement(selecQuery);
+			PreparedStatement pst = connection
+			.prepareStatement(selecQuery);
 			pst.setString(1, username);
 			pst.setString(2, password);
 			flag = pst.execute();
@@ -284,30 +278,31 @@ public class DBUserDao implements UserDao {
 		return flag;
 	}
 
-	// transaction
+	//transaction
 	@Override
 	public Weapon getUserWeapon(int userId) {
-		Weapon weapon = null;
-		try {
+		Weapon weapon =null;
+try {
 			connection.setAutoCommit(false);
 			String selectWeaponId = "select choosen_weapon_id from app.users where id = ?";
-			PreparedStatement pst = connection.prepareStatement(selectWeaponId);
+			PreparedStatement pst = connection
+					.prepareStatement(selectWeaponId);
 			pst.setInt(1, userId);
 			ResultSet results = pst.executeQuery();
-
+		
 			results.next();
 			int weapon_id = results.getInt("choosen_weapon_id");
-
-			// weapon = getWeapon(weapon_id);
-			// Getting weapon atributes
-			PreparedStatement pst1 = connection
-					.prepareStatement("select damage, price from app.weapons where id = ?");
+			
+			
+			//weapon = getWeapon(weapon_id);
+			//Getting weapon atributes
+			PreparedStatement pst1 = connection.prepareStatement("select damage, price from app.weapons where id = ?");
 			pst1.setInt(1, weapon_id);
 			ResultSet rs = pst1.executeQuery();
 			rs.next();
 			int damage = rs.getInt("damage");
 			int price = rs.getInt("price");
-			weapon = new Weapon(weapon_id, damage, price);
+			weapon= new Weapon(weapon_id,damage, price);
 			connection.commit();
 		} catch (SQLException e) {
 			try {
@@ -321,24 +316,27 @@ public class DBUserDao implements UserDao {
 		return weapon;
 	}
 
+
 	@Override
 	public int getUserScore(int userId) {
 		int score = 0;
-
+		
 		PreparedStatement pst;
 		try {
 			String selectScore = "select score from APP.USERS where id = ?";
-			pst = connection.prepareStatement(selectScore);
-
-			pst.setInt(1, userId);
-			ResultSet results = pst.executeQuery();
-			results.next();
-			score = results.getInt("score");
+			pst = connection
+					.prepareStatement(selectScore);
+		
+		pst.setInt(1, userId);
+		ResultSet results = pst.executeQuery();
+		results.next();
+		score = results.getInt("score");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return score;
 	}
+	
 
 }

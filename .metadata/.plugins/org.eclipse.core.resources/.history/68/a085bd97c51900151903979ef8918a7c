@@ -47,8 +47,8 @@ public class Registration extends HttpServlet {
 
 		// test
 		JSONObject test = new JSONObject();
-		test.put("username", "Preq");
-		test.put("password", "123");
+		test.put("username", "Tanq");
+		test.put("password", "Tanq");
 		test.put("email", "tatata");
 		line = test.toJSONString();
 

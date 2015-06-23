@@ -47,9 +47,9 @@ public class Registration extends HttpServlet {
 
 		// test
 		JSONObject test = new JSONObject();
-		test.put("username", "Preq");
-		test.put("password", "123");
-		test.put("email", "tatata");
+		test.put("username", "Petq");
+		test.put("password", "Petq");
+		test.put("email", "Petq");
 		line = test.toJSONString();
 
 		JSONObject result = new JSONObject();
@@ -110,7 +110,7 @@ public class Registration extends HttpServlet {
 
 				} else{
 					User existUser = ud.getUser(user.getUsername());
-
+					System.out.println(existUser.getUsername());
 					if(existUser != null){
 						
 						result.put("error", "Existing username");
