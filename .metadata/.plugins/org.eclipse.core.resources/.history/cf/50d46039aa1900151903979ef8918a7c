@@ -48,7 +48,7 @@ public class LeaderBoard extends HttpServlet {
 		String line = request.getParameter("userId");
 
 		// test
-		line = "2";
+		line = "4";
 
 		JSONArray result = new JSONArray();
 		JSONObject error = new JSONObject();
