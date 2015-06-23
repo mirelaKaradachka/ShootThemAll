@@ -81,8 +81,9 @@ public class Registration extends HttpServlet {
 				// if (getServletContext().getAttribute("cacheUsers") == null) {
 				// if (Cache.getCache().isEmpty()) {
 
-				// prowerqvame dali ima zapisi v bazata danni				
-				if (!ud.hasQuery()) {
+				// prowerqvame dali ima zapisi v bazata danni
+				
+				if (ud.hasQuery()) {
 
 					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
