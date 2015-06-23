@@ -45,7 +45,6 @@ public class LevelsMap extends HttpServlet {
 			
 			UserDao ud = new DBUserDao();
 			int numberOfActiveLevels = ud.getUserLevel(userId);
-			System.out.println(numberOfActiveLevels);
 					
 			/*
 			 * тук взимаме от потребителя нивото до което е стигнал от базата

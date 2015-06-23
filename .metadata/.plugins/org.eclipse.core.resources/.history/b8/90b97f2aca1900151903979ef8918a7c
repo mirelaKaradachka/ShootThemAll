@@ -84,8 +84,10 @@ public class Registration extends HttpServlet {
 				// prowerqvame dali ima zapisi v bazata danni				
 				if (!ud.hasQuery()) {
 
-					// намя записи => няма такъв потребител = > insert в базата данни и
+					// няма такъв потребител = > insert в базата данни и
 					// добавяне в хеша
+
+					// това идва като резултат от INSERT ... SELECT
 
 					
 					int userId = ud.addUser(user);
@@ -95,6 +97,7 @@ public class Registration extends HttpServlet {
 					// getServletConfig().getServletContext().setAttribute(
 					// "cacheUsers", cacheUsers);
 
+					// добавяме в базата данни за активни оръжия 1вото оръжие
 					if (userId > 0) {
 						response.setStatus(200);
 						result.put("userId", userId);
@@ -105,7 +108,6 @@ public class Registration extends HttpServlet {
 					}
 
 				} else{
-					//проверка дали съществува такъв запис
 					User existUser = ud.getUser(user.getUsername());
 
 					if(existUser != null){

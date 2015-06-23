@@ -45,7 +45,6 @@ public class LevelsMap extends HttpServlet {
 			
 			UserDao ud = new DBUserDao();
 			int numberOfActiveLevels = ud.getUserLevel(userId);
-			System.out.println(numberOfActiveLevels);
 					
 			/*
 			 * тук взимаме от потребителя нивото до което е стигнал от базата
@@ -54,9 +53,7 @@ public class LevelsMap extends HttpServlet {
 			 * или използваме кеша
 			 */
 			
-			if(numberOfActiveLevels <= 0 || numberOfActiveLevels > numberOfAllLevels){
-				numberOfActiveLevels = numberOfAllLevels;
-			}
+			
 			
 			
 			
@@ -80,15 +77,11 @@ public class LevelsMap extends HttpServlet {
 //				if (numberOfActiveLevels > numberOfAllLevels) {
 //					numberOfActiveLevels = numberOfAllLevels;
 //				}
-//
-//				response.setStatus(200);
-//				result.put("numberOfAllLevels", numberOfAllLevels);
-//				result.put("numberOfActiveLevels", numberOfActiveLevels);
-//			}
-			
-			response.setStatus(200);
-			result.put("numberOfAllLevels", numberOfAllLevels);
-			result.put("numberOfActiveLevels", numberOfActiveLevels);
+
+				response.setStatus(200);
+				result.put("numberOfAllLevels", numberOfAllLevels);
+				result.put("numberOfActiveLevels", numberOfActiveLevels);
+			}
 
 		} else {
 

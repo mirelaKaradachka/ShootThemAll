@@ -341,25 +341,6 @@ public class DBUserDao implements UserDao {
 		}
 		return score;
 	}
-	
-	public int getUserLevel(int userId){
-		int level = 0;
-
-		PreparedStatement pst;
-		try {
-			String selectScore = "select levelNo from APP.USERS where id = ?";
-			pst = connection.prepareStatement(selectScore);
-			pst.setInt(1, userId);
-			ResultSet results = pst.executeQuery();
-			results.next();
-			level = results.getInt("levelNo");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return level;
-		
-	}
 
 	
 	public boolean hasQuery(){

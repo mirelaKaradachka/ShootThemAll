@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.User;
-import model.dao.DBUserDao;
-import model.dao.UserDao;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * Servlet implementation class LevelsMap
@@ -42,53 +42,38 @@ public class LevelsMap extends HttpServlet {
 
 			int userId = Integer.parseInt(line);
 
-			
-			UserDao ud = new DBUserDao();
-			int numberOfActiveLevels = ud.getUserLevel(userId);
-			System.out.println(numberOfActiveLevels);
-					
+			int numberOfActiveLevels = 0;
 			/*
 			 * тук взимаме от потребителя нивото до което е стигнал от базата
 			 * данни
 			 * 
 			 * или използваме кеша
 			 */
-			
-			if(numberOfActiveLevels <= 0 || numberOfActiveLevels > numberOfAllLevels){
-				numberOfActiveLevels = numberOfAllLevels;
+
+			if (getServletContext().getAttribute("cacheUsers") == null) {
+
+				result.put("error", "No users in cache");
+				response.setStatus(400);
+
+			} else {
+				// кеш
+				ArrayList<User> list = (ArrayList<User>) getServletConfig()
+						.getServletContext().getAttribute("cacheUsers");
+
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i).getId() == userId) {
+						numberOfActiveLevels = list.get(i).getLevel();
+					}
+				}
+
+				if (numberOfActiveLevels > numberOfAllLevels) {
+					numberOfActiveLevels = numberOfAllLevels;
+				}
+
+				response.setStatus(200);
+				result.put("numberOfAllLevels", numberOfAllLevels);
+				result.put("numberOfActiveLevels", numberOfActiveLevels);
 			}
-			
-			
-			
-//			//izpolzvame kesha
-//			if (getServletContext().getAttribute("cacheUsers") == null) {
-//
-//				result.put("error", "No users in cache");
-//				response.setStatus(400);
-//
-//			} else {
-//				// кеш
-//				ArrayList<User> list = (ArrayList<User>) getServletConfig()
-//						.getServletContext().getAttribute("cacheUsers");
-//
-//				for (int i = 0; i < list.size(); i++) {
-//					if (list.get(i).getId() == userId) {
-//						numberOfActiveLevels = list.get(i).getLevel();
-//					}
-//				}
-//
-//				if (numberOfActiveLevels > numberOfAllLevels) {
-//					numberOfActiveLevels = numberOfAllLevels;
-//				}
-//
-//				response.setStatus(200);
-//				result.put("numberOfAllLevels", numberOfAllLevels);
-//				result.put("numberOfActiveLevels", numberOfActiveLevels);
-//			}
-			
-			response.setStatus(200);
-			result.put("numberOfAllLevels", numberOfAllLevels);
-			result.put("numberOfActiveLevels", numberOfActiveLevels);
 
 		} else {
 
