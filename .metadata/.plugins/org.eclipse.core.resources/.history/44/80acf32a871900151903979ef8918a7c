@@ -158,7 +158,7 @@ public class LeaderBoard extends HttpServlet {
 				
 					//topUsers.put(userUsername, userScore);
 				JSONObject userObj = new JSONObject();
-				userObj.put("position",(userPosition + 1));
+				userObj.put("position",userPosition);
 				userObj.put("username", userUsername);
 				userObj.put("score", userScore);
 				result.add(userObj);
