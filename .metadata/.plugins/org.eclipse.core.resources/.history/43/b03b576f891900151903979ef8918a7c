@@ -7,12 +7,12 @@ import java.sql.SQLException;
 public class DBManager {
 	private static DBManager dbinstances;
 
-	//tsvety connection 
+	//tsvety connection
 //	private static final String URL = "jdbc:derby:/Users/jgeorgiev/MyDB;create=true";
 //	private static final String USERNAME = "user";
 //	private static final String PASSWORD = "123";
 	
-	//Mirela conection
+	//Mirela konection
 	private static final String URL = "jdbc:derby:/Users/jgeorgiev/MyDB;create=true";
 	private static final String USERNAME = "user";
 	private static final String PASSWORD = "123";
