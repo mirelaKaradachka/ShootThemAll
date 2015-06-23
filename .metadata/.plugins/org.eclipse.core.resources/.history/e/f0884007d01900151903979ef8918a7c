@@ -392,13 +392,12 @@ public class DBUserDao implements UserDao {
 		ArrayList<Integer> weapon = new ArrayList<Integer>();
 		PreparedStatement pst;
 		try {
-			String selectWeapon = "select weapon_id from APP.UnlockedWeapons where user_id  = ?";
+			String selectWeapon = "select weapon_id from APP.UnlockedWeapons where id = ?";
 			pst = connection.prepareStatement(selectWeapon);
 			pst.setInt(1, userId);
 			ResultSet results = pst.executeQuery();
 			while(results.next()){
-				Integer weaponId = results.getInt("weapon_id");
-				System.out.println(weaponId);
+				Integer weaponId = results.getInt("levelNo");
 				weapon.add(weaponId);
 			}
 		} catch (SQLException e) {

@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Weapon;
 import model.dao.DBUserDao;
-import model.dao.DBWeaponDao;
 import model.dao.UserDao;
-import model.dao.WeaponDao;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -44,17 +42,24 @@ public class WeaponsStore extends HttpServlet {
 
 			int userId = Integer.parseInt(line);
 			UserDao ud = new DBUserDao();
-			WeaponDao wd = new DBWeaponDao();
 
 			/*
 			 * select в базата данни по userId за точките които потребителя има,
 			 * за всичките оръжия и за активните за него оръжия
 			 */
 
-			int score = ud.getUserScore(userId);		
-			ArrayList<Weapon> weapons = wd.getWeapons();
-			ArrayList<Integer> unlockedWeapons = ud.getUnlockedWeapons(userId);
+			// тест -> това идва от базата данни
+			int score = ud.getUserScore(userId);
+			
+			ArrayList<Weapon> weapons = new ArrayList<Weapon>();
+			weapons.add(new Weapon(1, 1, 0));
+			weapons.add(new Weapon(2, 2, 200));
+			weapons.add(new Weapon(3, 3, 500));
 
+			// тест -> това идва от базата данни
+			ArrayList<Integer> unlockedWeapons = new ArrayList<Integer>();
+			unlockedWeapons.add(new Weapon(1, 1, 0).getType());
+			unlockedWeapons.add(new Weapon(3, 3, 500).getType());
 
 			result.put("score", score);
 
@@ -79,7 +84,7 @@ public class WeaponsStore extends HttpServlet {
 			}
 
 			response.setStatus(200);
-			result.put("unlockedWeapons", unlockedWeaponsArr);
+			result.put("unlockedWeapons", unlochedWeaponsArr);
 
 		} else {
 

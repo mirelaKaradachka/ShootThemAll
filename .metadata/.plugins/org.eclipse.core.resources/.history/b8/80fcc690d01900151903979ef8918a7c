@@ -397,7 +397,7 @@ public class DBUserDao implements UserDao {
 			pst.setInt(1, userId);
 			ResultSet results = pst.executeQuery();
 			while(results.next()){
-				Integer weaponId = results.getInt("weapon_id");
+				Integer weaponId = results.getInt("levelNo");
 				System.out.println(weaponId);
 				weapon.add(weaponId);
 			}

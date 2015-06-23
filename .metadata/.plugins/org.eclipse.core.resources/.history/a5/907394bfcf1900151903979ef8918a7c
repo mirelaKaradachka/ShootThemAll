@@ -51,9 +51,14 @@ public class WeaponsStore extends HttpServlet {
 			 * за всичките оръжия и за активните за него оръжия
 			 */
 
-			int score = ud.getUserScore(userId);		
+			// тест -> това идва от базата данни
+			int score = ud.getUserScore(userId);
+			
 			ArrayList<Weapon> weapons = wd.getWeapons();
-			ArrayList<Integer> unlockedWeapons = ud.getUnlockedWeapons(userId);
+
+
+			// тест -> това идва от базата данни
+			ArrayList<Integer> unlockedWeapons = ud.getUnlockedWeapons(line);
 
 
 			result.put("score", score);

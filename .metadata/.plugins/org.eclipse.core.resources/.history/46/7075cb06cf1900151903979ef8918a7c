@@ -12,7 +12,7 @@ public interface UserDao {
 	
 	boolean hasQuery();
 	List getAllUsers();
-	ArrayList<Integer> getUnlockedWeapons(int userId);
+	ArrayList<Integer> getUnlockedWeapons();
 	User getUser(int userId);
 	User getUser(String username);
 	int addUser(User u);

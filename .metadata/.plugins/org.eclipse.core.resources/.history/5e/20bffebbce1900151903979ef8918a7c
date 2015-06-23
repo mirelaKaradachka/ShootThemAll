@@ -1,6 +1,6 @@
 package model.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import model.Weapon;
 
@@ -8,7 +8,7 @@ public interface WeaponDao {
 	
 	String DATASOURCE_DB = "DATASOURCE_DB";
 	
-	ArrayList<Weapon> getWeapons();
+	List getWeapons();
 	Weapon getWeapon(int weaponId);
 	
 	static WeaponDao getWeaponDao(String type){
