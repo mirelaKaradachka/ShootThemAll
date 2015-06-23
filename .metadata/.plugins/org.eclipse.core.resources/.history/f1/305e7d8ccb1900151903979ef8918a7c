@@ -268,7 +268,7 @@ public class DBUserDao implements UserDao {
 
 	@Override
 	public int existUser(String username, String password) {
-		int userId = -1;
+		int userId = null;
 		try {
 
 			String selecQuery = "select id, username , password from app.users where username = ? and password = ?";
@@ -277,8 +277,8 @@ public class DBUserDao implements UserDao {
 			pst.setString(2, password);
 			ResultSet results = pst.executeQuery();
 			if(results != null){
-				results.next();
-				userId = results.getInt("id");				
+				int use
+				
 			}
 			
 		} catch (SQLException e) {

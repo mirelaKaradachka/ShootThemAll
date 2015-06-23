@@ -17,7 +17,7 @@ public interface UserDao {
 	int addUser(User u);
 	void deletUser(int userId);
 	void updateUser(String type, String value, int userId);
-	int existUser(String username, String password);
+	boolean existUser(String username, String password);
 	Weapon getUserWeapon(int userId);
 	int getUserScore(int userId);
 	int getUserLevel(int userId);

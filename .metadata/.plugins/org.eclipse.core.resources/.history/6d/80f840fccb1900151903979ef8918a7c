@@ -135,7 +135,7 @@ public class Login extends HttpServlet {
 
 				} else {
 
-//					boolean existUser = false;
+					boolean existUser = false;
 					int userId = -1;
 					
 //					//използваме кеша -> друг вариант е от базата данни
@@ -162,40 +162,32 @@ public class Login extends HttpServlet {
 //					userId = Cache.getCache().getUserId(username);
 					
 					
-
-//					if (existUser) {
-//						result.put("userId", userId);
-//						response.setStatus(200);
-//						//System.out.println(Cache.getCache().getUser(userId).getDate());
-//					} else {
-//						
-//						// Тук проверяваме в базата данни дали съществува този потребител
-//						
-//						boolean existInDB = false;
-//						if(existInDB){
-//							
-//							//potrebitel ot selekta v bazata danni -> testov
-//							User user = new User(12, "Sonq", "Sonq", "Sonq", 100, 3, new Weapon(1, 1, 0), false);
-//							//update na datata v bazata danni za tozi potrebitel
-//							
-//							Cache.getCache().addUser(user);
-//							result.put("userId", userId);
-//							response.setStatus(200);
-//						}else{
-//							result.put("error", "Invalid username or password");
-//							response.setStatus(400);							
-//						}
-//						
-//						
-//					}
 					
-					userId = ud.existUser(username, password);
-					if(userId > 0){
+
+					if (existUser) {
 						result.put("userId", userId);
 						response.setStatus(200);
-					}else{
-						result.put("error", "Invalid username or password");
-						response.setStatus(400);
+						//System.out.println(Cache.getCache().getUser(userId).getDate());
+					} else {
+						
+						// Тук проверяваме в базата данни дали съществува този потребител
+						
+						boolean existInDB = false;
+						if(existInDB){
+							
+							//potrebitel ot selekta v bazata danni -> testov
+							User user = new User(12, "Sonq", "Sonq", "Sonq", 100, 3, new Weapon(1, 1, 0), false);
+							//update na datata v bazata danni za tozi potrebitel
+							
+							Cache.getCache().addUser(user);
+							result.put("userId", userId);
+							response.setStatus(200);
+						}else{
+							result.put("error", "Invalid username or password");
+							response.setStatus(400);							
+						}
+						
+						
 					}
 					
 
