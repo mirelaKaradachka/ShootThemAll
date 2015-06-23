@@ -50,27 +50,20 @@ public class LevelBuilder {
 		weaponObj.put("type", weapon.getType());
 		weaponObj.put("damage", weapon.getDamage());
 		
-		//вариант 1
 		for(int i = 0 ; i < enemies.length; i++){
-			enemies[i] = new Enemy(i+1, i+1, (maxLevel * 2000) + 1000 - (i+1) * 2000, i+1);
+			enemies[i] = new Enemy(i+1, i+1, (maxLevel * 200) + 100 - (i+1) * 200, i+1);
 		}
 		
-//		//вариант 2 -> за фиксирано максимум 3 нива
-//		for(int i = 0 ; i < enemies.length; i++){
-//			enemies[i] = new EnemyFactory().getEnemy(i+1);
-//		}
-//		
-		
-//		//за сега нямаме добри :)
-//		//damage = 0
-//		int goodEnemyCount = rand.nextInt(level * 4) + 1;
-//		Enemy goodEnemy = new EnemyFactory().getEnemy(100);
-//		JSONObject goodEnemyObj = new JSONObject();
-//		goodEnemyObj.put("type", goodEnemy.getType());
-//		goodEnemyObj.put("health", goodEnemy.getHealth());
-//		goodEnemyObj.put("duration", goodEnemy.getDuration());
-//		goodEnemyObj.put("damage", goodEnemy.getDamage());
-//		goodEnemyObj.put("count", goodEnemyCount);
+		//за сега нямаме добри :)
+		//damage = 0
+		int goodEnemyCount = rand.nextInt(level * 4) + 1;
+		Enemy goodEnemy = new EnemyFactory().getEnemy(100);
+		JSONObject goodEnemyObj = new JSONObject();
+		goodEnemyObj.put("type", goodEnemy.getType());
+		goodEnemyObj.put("health", goodEnemy.getHealth());
+		goodEnemyObj.put("duration", goodEnemy.getDuration());
+		goodEnemyObj.put("damage", goodEnemy.getDamage());
+		goodEnemyObj.put("count", goodEnemyCount);
 		
 		int bullets = 0;
 		for(int i = 0; i < randomNum.length; i++){

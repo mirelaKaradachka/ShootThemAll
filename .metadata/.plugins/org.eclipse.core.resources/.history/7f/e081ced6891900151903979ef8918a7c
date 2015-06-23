@@ -55,8 +55,8 @@ public class LeaderBoard extends HttpServlet {
 
 		if (line != null) {
 			int userId = Integer.parseInt(line);
-//			int userPosition = -1;
-//
+			int userPosition = -1;
+
 //			int count = 10;
 //
 //			// използваме кеша -> друг вариант е от базата данни

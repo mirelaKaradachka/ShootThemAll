@@ -50,14 +50,14 @@ public class LevelBuilder {
 		weaponObj.put("type", weapon.getType());
 		weaponObj.put("damage", weapon.getDamage());
 		
-		//вариант 1
+		//варянт 1
 		for(int i = 0 ; i < enemies.length; i++){
-			enemies[i] = new Enemy(i+1, i+1, (maxLevel * 2000) + 1000 - (i+1) * 2000, i+1);
+			enemies[i] = new Enemy(i+1, i+1, (maxLevel * 200) + 100 - (i+1) * 200, i+1);
 		}
 		
-//		//вариант 2 -> за фиксирано максимум 3 нива
+//		//варянт 2 -> за фиксирано максимум 3 нива
 //		for(int i = 0 ; i < enemies.length; i++){
-//			enemies[i] = new EnemyFactory().getEnemy(i+1);
+//			enemies[i] =new EnemyFactory().getEnemy(i+1);
 //		}
 //		
 		
